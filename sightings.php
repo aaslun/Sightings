@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 define ('SIGHTINGS_HANDLE','sightings');
 
-
 /*
  * Add map meta box to post and page in admin
  */
@@ -39,6 +38,10 @@ add_action('add_meta_boxes', function() {
     add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'post', 'normal', 'high');
     add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'page', 'normal', 'high');
 });
+
+add_action('admin_menu', function() {
+    add_options_page('Sightings',__('Sightings settings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
+    });
 
 /*
  * Enqueue Google Maps API JavaScript
@@ -49,11 +52,15 @@ add_action('init', function() {
         wp_enqueue_style(SIGHTINGS_HANDLE.'_style', plugin_dir_url(__FILE__).'sightings.css');
     });
 
-
 function sightings_meta_box() {
     // Using nonce for verification that this meta box is posted
     wp_nonce_field(plugin_basename(__FILE__), SIGHTINGS_HANDLE);
 
-    // include template
+    // include meta box template file
     include __DIR__ . '/sightings-meta-box.php';
+}
+
+function sightings_menu_page() {
+    // include sightings settings template file
+    include __DIR__ . '/sightings-settings.php';
 }

@@ -1,3 +1,7 @@
+<?php
+$settings = get_option(SIGHTINGS_HANDLE);
+?>
+
 <div class="wrapper">
     <div class="latlng_container">
         <h4>Current view center</h4>
@@ -16,10 +20,9 @@
 
 <script type="text/javascript">
     jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(35, 10);
-        var parliament = new google.maps.LatLng(59.327383, 18.06747);
+        var latlng = new google.maps.LatLng(<?php echo $settings['lat'] ? $settings['lat'] : '35' ?>, <?php echo $settings['lng'] ? $settings['lng'] : '10' ?>);
         var myOptions = {
-            zoom: 2,
+            zoom: <?php echo $settings['zoom'] ? $settings['zoom'] : '2' ?>,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
