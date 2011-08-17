@@ -1,5 +1,7 @@
 <?php
-$settings = get_option(SIGHTINGS_HANDLE);
+$default_settings = get_option(SIGHTINGS_HANDLE);
+$geotag = get_post_meta(the_ID(),SIGHTINGS_HANDLE);
+
 if(isset($_REQUEST['debug'])) {
     $debug = true;
 }
@@ -19,11 +21,11 @@ if(isset($_REQUEST['debug'])) {
     <div class="latlng_container marker">
         <h4>Marker</h4>
         <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
-        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo $settings['lat'] ? $settings['lat'] : '35' ?></span>
+        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo $default_settings['lat'] ? $default_settings['lat'] : '35' ?></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo $settings['lng'] ? $settings['lng'] : '10' ?></span>
+        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo $default_settings['lng'] ? $default_settings['lng'] : '10' ?></span>
         <br />
-        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo $settings['zoom'] ? $settings['zoom'] : '2' ?></span>
+        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo $default_settings['zoom'] ? $default_settings['zoom'] : '2' ?></span>
     </div>
     <div id="sightings-status">
         <span class="message" style="display: none;"></span>
@@ -34,9 +36,9 @@ if(isset($_REQUEST['debug'])) {
 <script type="text/javascript">
     // Load the map
     jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(<?php echo $settings['lat'] ? $settings['lat'] : '35' ?>, <?php echo $settings['lng'] ? $settings['lng'] : '10' ?>);
+        var latlng = new google.maps.LatLng(<?php echo $default_settings['lat'] ? $default_settings['lat'] : '35' ?>, <?php echo $default_settings['lng'] ? $default_settings['lng'] : '10' ?>);
         var myOptions = {
-            zoom: <?php echo $settings['zoom'] ? $settings['zoom'] : '2' ?>,
+            zoom: <?php echo $default_settings['zoom'] ? $default_settings['zoom'] : '2' ?>,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
