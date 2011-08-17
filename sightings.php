@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * Plug-in constants
  */
 define ('SIGHTINGS_HANDLE','sightings');
+define ('SIGHTINGS_PLUGIN_DIR', plugin_dir_url(__FILE__));
 
 /*
  * Add map meta box to post and page in admin

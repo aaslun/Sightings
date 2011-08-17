@@ -20,6 +20,14 @@
     color: #555;
 }
 
+.latlng_container .button {
+    float: right;
+}
+
+#sightings-status .message {
+    font-size: 16pt;
+}
+
 /* Sightings settings page style
 */
 
