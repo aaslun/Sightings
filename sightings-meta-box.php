@@ -21,11 +21,11 @@ if(isset($_REQUEST['debug'])) {
     <div class="latlng_container marker">
         <h4>Marker</h4>
         <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
-        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo $default_settings['lat'] ? $default_settings['lat'] : '35' ?></span>
+        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo $geotag['lat'] ? $geotag['lat'] : $default_settings['lat'] ?></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo $default_settings['lng'] ? $default_settings['lng'] : '10' ?></span>
+        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo $geotag['lng'] ? $geotag['lng'] : $default_settings['lng'] ?></span>
         <br />
-        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo $default_settings['zoom'] ? $default_settings['zoom'] : '2' ?></span>
+        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo $geotag['zoom'] ? $geotag['zoom'] : $default_settings['zoom'] ?></span>
     </div>
     <div id="sightings-status">
         <span class="message" style="display: none;"></span>
