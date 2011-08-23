@@ -1,6 +1,13 @@
 <?php
 $default_settings = get_option(SIGHTINGS_HANDLE);
-$geotag = get_post_meta(the_ID(),SIGHTINGS_HANDLE);
+
+$geotag = array();
+
+if(isset($_GET['post'])) {
+    $geotag = unserialize(get_post_meta($_GET['post'],SIGHTINGS_HANDLE));
+}
+
+_log($geotag['lng']);
 
 if(isset($_REQUEST['debug'])) {
     $debug = true;
