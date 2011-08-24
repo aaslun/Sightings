@@ -4,10 +4,8 @@ $default_settings = get_option(SIGHTINGS_HANDLE);
 $geotag = array();
 
 if(isset($_GET['post'])) {
-    $geotag = unserialize(get_post_meta($_GET['post'],SIGHTINGS_HANDLE));
+    $geotag = get_post_meta($_GET['post'],SIGHTINGS_HANDLE,true);
 }
-
-_log($geotag['lng']);
 
 if(isset($_REQUEST['debug'])) {
     $debug = true;
@@ -43,9 +41,9 @@ if(isset($_REQUEST['debug'])) {
 <script type="text/javascript">
     // Load the map
     jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(<?php echo $default_settings['lat'] ? $default_settings['lat'] : '35' ?>, <?php echo $default_settings['lng'] ? $default_settings['lng'] : '10' ?>);
+        var latlng = new google.maps.LatLng(<?php echo $geotag['lat'] ? $geotag['lat'] : $default_settings['lat'] ?>, <?php echo $geotag['lng'] ? $geotag['lng'] : $default_settings['lng'] ?>);
         var myOptions = {
-            zoom: <?php echo $default_settings['zoom'] ? $default_settings['zoom'] : '2' ?>,
+            zoom: <?php echo $geotag['zoom'] ? $geotag['zoom'] : $default_settings['zoom'] ?>,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
