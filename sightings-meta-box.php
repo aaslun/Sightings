@@ -1,12 +1,21 @@
 <?php
+/**
+ * Load default settings for map and marker
+ */
 $default_settings = get_option(SIGHTINGS_HANDLE);
 
 $geotag = array();
 
+/**
+ * Load marker position and map zoom level, if already set
+ */
 if(isset($_GET['post'])) {
     $geotag = get_post_meta($_GET['post'],SIGHTINGS_HANDLE,true);
 }
 
+/**
+ * Check if debug mode is on, displays extra info about map view port
+ */
 if(isset($_REQUEST['debug'])) {
     $debug = true;
 }
@@ -26,14 +35,14 @@ if(isset($_REQUEST['debug'])) {
     <div class="latlng_container marker">
         <h4>Marker</h4>
         <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
-        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo $geotag['lat'] ? $geotag['lat'] : $default_settings['lat'] ?></span>
+        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo isset($geotag['lat']) ? $geotag['lat'] : $default_settings['lat'] ?></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo $geotag['lng'] ? $geotag['lng'] : $default_settings['lng'] ?></span>
+        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo isset($geotag['lng']) ? $geotag['lng'] : $default_settings['lng'] ?></span>
         <br />
-        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo $geotag['zoom'] ? $geotag['zoom'] : $default_settings['zoom'] ?></span>
+        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($geotag['zoom']) ? $geotag['zoom'] : $default_settings['zoom'] ?></span>
     </div>
     <div id="sightings-status">
-        <span class="message" style="display: none;"></span>
+        <div class="message" style="display: none;"></div>
     </div>
     <div id="map_canvas" style="width:100%; height:400px;"></div>
 </div>
@@ -41,9 +50,9 @@ if(isset($_REQUEST['debug'])) {
 <script type="text/javascript">
     // Load the map
     jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(<?php echo $geotag['lat'] ? $geotag['lat'] : $default_settings['lat'] ?>, <?php echo $geotag['lng'] ? $geotag['lng'] : $default_settings['lng'] ?>);
+        var latlng = new google.maps.LatLng(<?php echo isset($geotag['lat']) ? $geotag['lat'] : $default_settings['lat'] ?>, <?php echo isset($geotag['lng']) ? $geotag['lng'] : $default_settings['lng'] ?>);
         var myOptions = {
-            zoom: <?php echo $geotag['zoom'] ? $geotag['zoom'] : $default_settings['zoom'] ?>,
+            zoom: <?php echo isset($geotag['zoom']) ? $geotag['zoom'] : $default_settings['zoom'] ?>,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -80,6 +89,9 @@ if(isset($_REQUEST['debug'])) {
         });
     });
 
+    /**
+     * Check if ready to save
+     */
     function confirmMarkerLatLng() {
         if(jQuery('#marker_lat').html() == '') {
             animateBackground('#feef87','fast',false);
@@ -90,6 +102,13 @@ if(isset($_REQUEST['debug'])) {
         }
     }
 
+    /**
+     * Animate background color for marker info box
+     * Useful for emphasizing message status
+     * @param color
+     * @param speed
+     * @param pause
+     */
     function animateBackground( color , speed , pause ) {
         jQuery('.marker').animate({backgroundColor:color}, speed, 'linear', function() {
             if(!pause) {
@@ -102,17 +121,25 @@ if(isset($_REQUEST['debug'])) {
         })
     }
 
+    /**
+     * Displays a text message in the Map meta box for a duration in milliseconds
+     * @param message
+     * @param duration
+     */
     function postStatusMessage( message , duration ) {
         jQuery('#sightings-status .message').html(message).fadeIn('fast').delay(duration).fadeOut('slow');
     }
 
+    /**
+     * Save marker latitude, longitude and map zoom level to database
+     */
     function doAjax() {
         jQuery.ajax({
             url : '<?php echo SIGHTINGS_PLUGIN_DIR ?>sightings-ajax.php',
             data : 'lat='+jQuery('#marker_lat').html()+'&lng='+jQuery('#marker_lng').html()+'&zoom='+jQuery('#map_zoom').html()+'&post_id=<?php echo the_ID(); ?>',
             type : 'POST',
             beforeSend : function(html) {
-                jQuery('#sightings-status').hide().append('<img src="<?php echo SIGHTINGS_PLUGIN_DIR ?>images/loading.gif" alt="loading" />').fadeIn();
+                jQuery('#sightings-status').hide().append('<img id="sightings_loader" src="<?php echo SIGHTINGS_PLUGIN_DIR ?>images/loading.gif" alt="loading" />').fadeIn();
             },
             success : function(html) {
                 animateBackground('#99ff99','slow',true);

@@ -25,7 +25,14 @@
 }
 
 #sightings-status .message {
+    float: left;
+    padding-top: 25px;
     font-size: 16pt;
+}
+
+#sightings_loader {
+    float: right;
+    margin: 15px 15px 0 0;
 }
 
 /* Sightings settings page style
