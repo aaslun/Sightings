@@ -2,6 +2,10 @@
 *   Sightings plugin style
 **/
 
+#map_canvas {
+    clear: both;
+}
+
 .latlng_container {
     width: 30%;
     float: left;
