@@ -9,6 +9,11 @@
 
 add_shortcode('sightings-map', function($parameters)
     {
+        /**
+         * @var wpdb $wpdb
+         */
+        global $wpdb;
+        $sightings = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ) );
 
         $width = ''; // map width
         $height = ''; // map height
