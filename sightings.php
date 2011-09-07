@@ -36,12 +36,12 @@ define ('SIGHTINGS_PLUGIN_DIR', plugin_dir_url(__FILE__));
  * Add map meta box to post and page in admin
  */
 add_action('add_meta_boxes', function() {
-    add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'post', 'normal', 'high');
-    add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'page', 'normal', 'high');
-});
+        add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'post', 'normal', 'high');
+        add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'page', 'normal', 'high');
+    });
 
 add_action('admin_menu', function() {
-    add_options_page('Sightings',__('Sightings settings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
+        add_options_page('Sightings',__('Sightings settings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
     });
 
 /*
@@ -51,17 +51,28 @@ add_action('init', function() {
         wp_enqueue_script('jquery');
         wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
         wp_enqueue_style(SIGHTINGS_HANDLE.'_style', plugin_dir_url(__FILE__).'sightings.css');
+                
+        // Register shortcode
+        include __DIR__ . '/shortcode-sightings-map.php';
     });
 
+/**
+ * Function for creating the sightings meta box in admin
+ * @return void
+ */
 function sightings_meta_box() {
     // Using nonce for verification that this meta box is posted
     wp_nonce_field(plugin_basename(__FILE__), SIGHTINGS_HANDLE);
 
     // include meta box template file
-    include __DIR__ . '/sightings-meta-box.php';
+    require_once __DIR__ . '/sightings-meta-box.php';
 }
 
+/**
+ * Sightings plugin settings page
+ * @return void
+ */
 function sightings_menu_page() {
     // include sightings settings template file
-    include __DIR__ . '/sightings-settings.php';
+    require_once __DIR__ . '/sightings-settings.php';
 }

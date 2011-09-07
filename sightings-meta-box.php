@@ -19,8 +19,9 @@ if(isset($_GET['post'])) {
 if(isset($_REQUEST['debug'])) {
     $debug = true;
 }
-?>
 
+// Meta box template
+?>
 <div class="wrapper">
 <?php
     if(isset($debug)) {
@@ -148,5 +149,4 @@ if(isset($_REQUEST['debug'])) {
             }
         });
     }
-
 </script>
