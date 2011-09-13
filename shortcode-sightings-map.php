@@ -33,7 +33,29 @@ add_shortcode('sightings-map', function($parameters)
 
     <script type="text/javascript">
         jQuery(document).ready(function(){
-            var map_latlng = new google.maps.LatLng(65,13);
+             <?
+            // Calculate markers center
+            $lat = '';
+            $lng = '';
+            if(count($sightings) > 0) {
+                foreach($sightings as $sight)
+                {
+                    $sight = unserialize($sight);
+                    $lat += $sight['lat'];
+                    $lng += $sight['lng'];
+                }
+                $lat = ($lat / count($sightings));
+                $lng = ($lng / count($sightings));
+                _log($lat);
+                _log($lng);
+
+            }
+            else {
+                $lat = 65;
+                $lng = 13;
+            }
+            ?>
+            var map_latlng = new google.maps.LatLng(<?= $lat ?>,<?= $lng ?>);
             var myOptions = {
                 zoom: 4,
                 center: map_latlng,
