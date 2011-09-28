@@ -14,7 +14,7 @@ add_shortcode('sightings-map', function($parameters)
          */
         global $wpdb;
         // Fetch all sightings from database
-        $sightings = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ) );
+        $sightings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_value, post_id FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ), ARRAY_A );
 
         $width = ''; // map width
         $height = ''; // map height
@@ -40,15 +40,12 @@ add_shortcode('sightings-map', function($parameters)
             if(count($sightings) > 0) {
                 foreach($sightings as $sight)
                 {
-                    $sight = unserialize($sight);
+                    $sight = unserialize($sight['meta_value']);
                     $lat += $sight['lat'];
                     $lng += $sight['lng'];
                 }
                 $lat = ($lat / count($sightings));
                 $lng = ($lng / count($sightings));
-                _log($lat);
-                _log($lng);
-
             }
             else {
                 $lat = 65;
@@ -67,16 +64,22 @@ add_shortcode('sightings-map', function($parameters)
             if(count($sightings) > 0) {
                 foreach($sightings as $sight)
                 {
-                    $sight = unserialize($sight);
+                    $s = unserialize($sight['meta_value']);
+                    $sight_title = get_post_field('post_title',$sight['post_id']);
                     ?>
-                    var latlng = new google.maps.LatLng(<?= $sight['lat'] ?>,<?= $sight['lng'] ?>);
+                    var latlng = new google.maps.LatLng(<?= $s['lat'] ?>,<?= $s['lng'] ?>);
+                    var infoWindow = new google.maps.InfoWindow ();
                     var marker = new google.maps.Marker({
-                        map:map,
-                        draggable:false,
+                        map: map,
+                        draggable: false,
                         animation: google.maps.Animation.DROP,
-                        position:latlng
+                        position: latlng
                     });
-                    <?
+                    google.maps.event.addListener(marker, 'click', function(){
+                        infoWindow.setContent('<?= $sight_title ?>');
+                        infoWindow.open(map, this);
+                    });
+                        <?
                 }
             }
             ?>

@@ -78,13 +78,13 @@ if(isset($_REQUEST['debug'])) {
             jQuery('#map_zoom').html(map.getZoom());
         });
 
-        // Position marker on click
+        // Reposition marker on mouse drag
         google.maps.event.addListener(marker, 'drag', function() {
             jQuery('#marker_lat').html(Math.round(marker.getPosition().lat()*1000)/1000);
             jQuery('#marker_lng').html(Math.round(marker.getPosition().lng()*1000)/1000);
         });
 
-        // Clear marker div color on drag
+        // Clear marker div color on mouse drag start
         google.maps.event.addListener(marker, 'dragstart', function() {
             animateBackground('#ffffff','fast',false);
         });
