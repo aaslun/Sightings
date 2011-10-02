@@ -33,7 +33,7 @@ add_shortcode('sightings-map', function($parameters)
 
     <script type="text/javascript">
         jQuery(document).ready(function(){
-             <?
+            <?
             // Calculate markers center
             $lat = '';
             $lng = '';
@@ -54,32 +54,36 @@ add_shortcode('sightings-map', function($parameters)
             ?>
             var map_latlng = new google.maps.LatLng(<?= $lat ?>,<?= $lng ?>);
             var myOptions = {
-                zoom: 4,
+                zoom: 4, // TODO: zoom level should be dynamic
                 center: map_latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(document.getElementById('sightings_map'),
                     myOptions);
             <?
+            // Render sightings markers on map, only from posts that are published
             if(count($sightings) > 0) {
                 foreach($sightings as $sight)
                 {
                     $s = unserialize($sight['meta_value']);
-                    $sight_title = get_post_field('post_title',$sight['post_id']);
-                    ?>
-                    var latlng = new google.maps.LatLng(<?= $s['lat'] ?>,<?= $s['lng'] ?>);
-                    var infoWindow = new google.maps.InfoWindow ();
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        draggable: false,
-                        animation: google.maps.Animation.DROP,
-                        position: latlng
-                    });
-                    google.maps.event.addListener(marker, 'click', function(){
-                        infoWindow.setContent('<?= $sight_title ?>');
-                        infoWindow.open(map, this);
-                    });
+                    $post = get_post($sight['post_id']);
+                    if($post != '' && $post->post_status == 'publish') {
+                        $sight_info = '<p><strong><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</strong></p>';
+                        ?>
+                        var latlng = new google.maps.LatLng(<?= $s['lat'] ?>,<?= $s['lng'] ?>);
+                        var infoWindow = new google.maps.InfoWindow ();
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            draggable: false,
+                            animation: google.maps.Animation.DROP,
+                            position: latlng
+                        });
+                        google.maps.event.addListener(marker, 'click', function(){
+                            infoWindow.setContent('<?= $sight_info ?>');
+                            infoWindow.open(map, this);
+                        });
                         <?
+                    }
                 }
             }
             ?>

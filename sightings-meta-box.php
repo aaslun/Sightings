@@ -42,6 +42,11 @@ if(isset($_REQUEST['debug'])) {
         <br />
         <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($geotag['zoom']) ? $geotag['zoom'] : $default_settings['zoom'] ?></span>
     </div>
+    <div class="post_options_container">
+        <h4>Options</h4>
+        <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
+        <input id="sightings_display_toggle" type="checkbox"/>
+    </div>
     <div id="sightings-status">
         <div class="message" style="display: none;"></div>
     </div>
