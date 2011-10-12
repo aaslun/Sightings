@@ -7,7 +7,7 @@
 }
 
 .latlng_container, .post_options_container {
-    width: 30%;
+    width: 25%;
     float: left;
     border: 1px dashed gray;
     margin: 0 15px 8px 0;

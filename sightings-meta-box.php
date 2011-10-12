@@ -4,13 +4,20 @@
  */
 $default_settings = get_option(SIGHTINGS_HANDLE);
 
-$geotag = array();
+$sighting = array();
 
 /**
  * Load marker position and map zoom level, if already set
  */
 if(isset($_GET['post'])) {
-    $geotag = get_post_meta($_GET['post'],SIGHTINGS_HANDLE,true);
+    $sighting = get_post_meta($_GET['post'],SIGHTINGS_HANDLE,true);
+}
+/**
+ * Default display map on new posts?
+ * If 'lat' is set, post is not new
+ */
+if(empty($sighting['lat']) && $default_settings['display'] != 0) {
+    $sighting['display'] = 1;
 }
 
 /**
@@ -33,20 +40,22 @@ if(isset($_REQUEST['debug'])) {
         <?php _e('Longitude:'); ?> <span id="map_lng"></span>
     </div>
     <?php } ?>
-    <div class="latlng_container marker">
+    <div class="latlng_container status">
         <h4>Marker</h4>
         <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
-        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo isset($geotag['lat']) ? $geotag['lat'] : $default_settings['lat'] ?></span>
+        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo isset($geotag['lng']) ? $geotag['lng'] : $default_settings['lng'] ?></span>
+        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?></span>
         <br />
-        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($geotag['zoom']) ? $geotag['zoom'] : $default_settings['zoom'] ?></span>
+        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?></span>
     </div>
-    <div class="post_options_container">
-        <h4>Options</h4>
-        <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
-        <input id="sightings_display_toggle" type="checkbox"/>
-    </div>
+
+        <div class="post_options_container status">
+            <h4>Options</h4>
+            <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
+            <input id="sightings_display_toggle" type="checkbox" <?php echo isset($sighting['display']) ? 'checked="checked"' : '' ?>/>
+        </div>
+
     <div id="sightings-status">
         <div class="message" style="display: none;"></div>
     </div>
@@ -56,9 +65,9 @@ if(isset($_REQUEST['debug'])) {
 <script type="text/javascript">
     // Load the map
     jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(<?php echo isset($geotag['lat']) ? $geotag['lat'] : $default_settings['lat'] ?>, <?php echo isset($geotag['lng']) ? $geotag['lng'] : $default_settings['lng'] ?>);
+        var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?>);
         var myOptions = {
-            zoom: <?php echo isset($geotag['zoom']) ? $geotag['zoom'] : $default_settings['zoom'] ?>,
+            zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?>,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -116,7 +125,7 @@ if(isset($_REQUEST['debug'])) {
      * @param pause
      */
     function animateBackground( color , speed , pause ) {
-        jQuery('.marker').animate({backgroundColor:color}, speed, 'linear', function() {
+        jQuery('.status').animate({backgroundColor:color}, speed, 'linear', function() {
             if(!pause) {
                 jQuery(this).animate({
                     backgroundColor: '#ffffff'
@@ -142,7 +151,7 @@ if(isset($_REQUEST['debug'])) {
     function doAjax() {
         jQuery.ajax({
             url : '<?php echo SIGHTINGS_PLUGIN_DIR ?>sightings-ajax.php',
-            data : 'lat='+jQuery('#marker_lat').html()+'&lng='+jQuery('#marker_lng').html()+'&zoom='+jQuery('#map_zoom').html()+'&post_id=<?php echo the_ID(); ?>',
+            data : 'lat='+jQuery('#marker_lat').html()+'&lng='+jQuery('#marker_lng').html()+'&zoom='+jQuery('#map_zoom').html()+'&post_id=<?php echo the_ID(); ?>&display='+jQuery('#sightings_display_toggle').is(':checked'),
             type : 'POST',
             beforeSend : function(html) {
                 jQuery('#sightings-status').hide().append('<img id="sightings_loader" src="<?php echo SIGHTINGS_PLUGIN_DIR ?>images/loading.gif" alt="loading" />').fadeIn();

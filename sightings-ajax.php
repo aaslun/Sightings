@@ -17,6 +17,10 @@ if(isset($_POST['zoom'])) {
 if(isset($_POST['post_id'])) {
     $post_id = $_POST['post_id'];
 }
+if(isset($_POST['display'])) {
+    if($_POST['display'] != 'false')
+    $geotag['display'] = true;
+}
 
 if($post_id != '') {
     update_post_meta($post_id,SIGHTINGS_HANDLE,$geotag);
