@@ -41,7 +41,7 @@ add_action('add_meta_boxes', function() {
     });
 
 add_action('admin_menu', function() {
-        add_options_page('Sightings',__('Sightings settings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
+        add_options_page('Sightings',__('Sightings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
     });
 
 /*
@@ -51,9 +51,17 @@ add_action('init', function() {
         wp_enqueue_script('jquery');
         wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
         wp_enqueue_style(SIGHTINGS_HANDLE.'_style', plugin_dir_url(__FILE__).'sightings.css');
-                
+
         // Register shortcode
         include __DIR__ . '/shortcode-sightings-map.php';
+    });
+
+add_filter('comments_template',function($content) {
+        global $post;
+        $sighting = get_post_meta($post->ID,SIGHTINGS_HANDLE,true);
+        if(isset($sighting['display'])) {
+            return $content . echo_sightings_post_map($sighting);
+        }
     });
 
 /**
@@ -75,4 +83,33 @@ function sightings_meta_box() {
 function sightings_menu_page() {
     // include sightings settings template file
     require_once __DIR__ . '/sightings-settings.php';
+}
+
+function echo_sightings_post_map($sighting) {
+    ?>
+        <div id="map_canvas" style="width:100%; height:200px;"></div>
+        <script type="text/javascript">
+            // Load the map
+            jQuery(window).load(function(){
+                var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : '' ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : '' ?>);
+                var myOptions = {
+                    zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
+                    center: latlng,
+                    draggable: false,
+                    streetViewControl: false,
+                    panControl: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById('map_canvas'),
+                        myOptions);
+
+                var marker = new google.maps.Marker({
+                    map:map,
+                    draggable:false,
+                    animation: google.maps.Animation.DROP,
+                    position:latlng
+                });                
+            });
+        </script>
+    <?
 }

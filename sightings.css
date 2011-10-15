@@ -2,12 +2,17 @@
 *   Sightings plugin style
 **/
 
+.use {
+    padding-top: 3px;
+}
+
 #map_canvas {
     clear: both;
 }
 
 .latlng_container, .post_options_container {
     width: 25%;
+    height: 60px;
     float: left;
     border: 1px dashed gray;
     margin: 0 15px 8px 0;

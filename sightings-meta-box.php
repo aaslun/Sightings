@@ -29,7 +29,7 @@ if(isset($_REQUEST['debug'])) {
 
 // Meta box template
 ?>
-<div class="wrapper">
+<div class="sightings wrapper">
 <?php
     if(isset($debug)) {
     ?>
@@ -42,7 +42,6 @@ if(isset($_REQUEST['debug'])) {
     <?php } ?>
     <div class="latlng_container status">
         <h4>Marker</h4>
-        <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
         <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?></span>
         <br />
         <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?></span>
@@ -50,12 +49,14 @@ if(isset($_REQUEST['debug'])) {
         <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?></span>
     </div>
 
-        <div class="post_options_container status">
-            <h4>Options</h4>
-            <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
-            <input id="sightings_display_toggle" type="checkbox" <?php echo isset($sighting['display']) ? 'checked="checked"' : '' ?>/>
-        </div>
-
+    <div class="post_options_container status">
+        <h4>Options</h4>
+        <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
+        <input id="sightings_display_toggle" type="checkbox" <?php echo isset($sighting['display']) ? 'checked="checked"' : '' ?>/>
+    </div>
+    <div class="use">
+        <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
+    </div>
     <div id="sightings-status">
         <div class="message" style="display: none;"></div>
     </div>
