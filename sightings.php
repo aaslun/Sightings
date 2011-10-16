@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Sightings
-Plugin URI: http://webdez.se/
+Plugin URI: http://webdez.se/2011/10/sightings/
 Description: Sightings is an easy to use plugin for geo-tagging your posts with placemarks. You can display all placemarks on a large map. It utilizes Google Maps Javascript API V3.
 Version: 1.0
 Author: Andreas Lundgren
@@ -96,6 +96,7 @@ function echo_sightings_post_map($sighting) {
                     zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
                     center: latlng,
                     draggable: false,
+                    zoomControl: false,
                     streetViewControl: false,
                     panControl: false,
                     mapTypeId: google.maps.MapTypeId.ROADMAP

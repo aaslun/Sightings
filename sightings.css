@@ -57,3 +57,8 @@
     width: 90%;
     color: #000000;
 }
+
+#donate_container {
+    float: right;
+    width: 200px;
+}
