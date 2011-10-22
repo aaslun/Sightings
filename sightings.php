@@ -3,7 +3,7 @@
 Plugin Name: Sightings
 Plugin URI: http://webdez.se/2011/10/sightings/
 Description: Sightings is an easy to use plugin for geo-tagging your posts with placemarks. You can display all placemarks on a large map. It utilizes Google Maps Javascript API V3.
-Version: 1.0
+Version: 1.1
 Author: Andreas Lundgren
 Author URI: http://webdez.se/
 License: GPLv2 or later
@@ -25,12 +25,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 /*
- * Plug-in constants
+ * Plugin constants
  */
 define ('SIGHTINGS_HANDLE','sightings');
 define ('SIGHTINGS_PLUGIN_DIR', plugin_dir_url(__FILE__));
+
+/*
+ * Plugin textdomain
+ */
+load_plugin_textdomain(SIGHTINGS_HANDLE, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
 
 /*
  * Add map meta box to post and page in admin
@@ -56,12 +60,18 @@ add_action('init', function() {
         include __DIR__ . '/shortcode-sightings-map.php';
     });
 
+/*
+ * Filter to echo the post map
+ */
 add_filter('comments_template',function($content) {
-        global $post;
-        $sighting = get_post_meta($post->ID,SIGHTINGS_HANDLE,true);
-        if(isset($sighting['display'])) {
-            return $content . echo_sightings_post_map($sighting);
+        if(is_single()) {
+            global $post;
+            $sighting = get_post_meta($post->ID,SIGHTINGS_HANDLE,true);
+            if(isset($sighting['display'])) {
+                return $content . echo_sightings_post_map($sighting);
+            }
         }
+        return $content;
     });
 
 /**
@@ -85,32 +95,38 @@ function sightings_menu_page() {
     require_once __DIR__ . '/sightings-settings.php';
 }
 
+/**
+ * Echo the Sightings post map
+ * @param $sighting
+ * @return void
+ */
 function echo_sightings_post_map($sighting) {
     ?>
-        <div id="map_canvas" style="width:100%; height:200px;"></div>
-        <script type="text/javascript">
-            // Load the map
-            jQuery(window).load(function(){
-                var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : '' ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : '' ?>);
-                var myOptions = {
-                    zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
-                    center: latlng,
-                    draggable: false,
-                    zoomControl: false,
-                    streetViewControl: false,
-                    panControl: false,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                var map = new google.maps.Map(document.getElementById('map_canvas'),
-                        myOptions);
+<div id="map_canvas" style="width:100%; height:200px;"></div>
+<script type="text/javascript">
+    // Load the map
+    jQuery(window).load(function(){
+        var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : '' ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : '' ?>);
+        var myOptions = {
+            zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
+            center: latlng,
+            draggable: false,
+            zoomControl: false,
+            scrollwheel: false,
+            streetViewControl: false,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'),
+                myOptions);
 
-                var marker = new google.maps.Marker({
-                    map:map,
-                    draggable:false,
-                    animation: google.maps.Animation.DROP,
-                    position:latlng
-                });                
-            });
-        </script>
-    <?
+        var marker = new google.maps.Marker({
+            map:map,
+            draggable:false,
+            animation: google.maps.Animation.DROP,
+            position:latlng
+        });
+    });
+</script>
+<?php
 }

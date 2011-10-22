@@ -2,6 +2,7 @@
 /**
  *  Logic and template for the [sightings-map] shortcode which produces a map containing sightings from posts
  *
+ *  TODO: Support parameters
  *  Optional parameters:
  *  width   -   Map width in pixels or percent
  *  height  -   Map height in pixels or percent
@@ -28,12 +29,12 @@ add_shortcode('sightings-map', function($parameters)
 
         // Map container
         ?>
-    <div id="sightings_map" style="width:<?= $width ?>; height:<?= $height ?>;">
+    <div id="sightings_map" style="width:<?php echo $width ?>; height:<?php echo $height ?>;">
     </div>
 
     <script type="text/javascript">
         jQuery(document).ready(function(){
-            <?
+            <?php
             // Calculate markers center
             $lat = '';
             $lng = '';
@@ -52,7 +53,7 @@ add_shortcode('sightings-map', function($parameters)
                 $lng = 13;
             }
             ?>
-            var map_latlng = new google.maps.LatLng(<?= $lat ?>,<?= $lng ?>);
+            var map_latlng = new google.maps.LatLng(<?php echo $lat ?>,<?php echo $lng ?>);
             var myOptions = {
                 zoom: 4, // TODO: zoom level should be dynamic
                 center: map_latlng,
@@ -60,7 +61,7 @@ add_shortcode('sightings-map', function($parameters)
             };
             var map = new google.maps.Map(document.getElementById('sightings_map'),
                     myOptions);
-            <?
+            <?php
             // Render sightings markers on map, only from posts that are published
             if(count($sightings) > 0) {
                 foreach($sightings as $sight)
@@ -70,7 +71,7 @@ add_shortcode('sightings-map', function($parameters)
                     if($post != '' && $post->post_status == 'publish') {
                         $sight_info = '<p><strong><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</strong></p>';
                         ?>
-                        var latlng = new google.maps.LatLng(<?= $s['lat'] ?>,<?= $s['lng'] ?>);
+                        var latlng = new google.maps.LatLng(<?php echo $s['lat'] ?>,<?php echo $s['lng'] ?>);
                         var infoWindow = new google.maps.InfoWindow ();
                         var marker = new google.maps.Marker({
                             map: map,
@@ -79,10 +80,10 @@ add_shortcode('sightings-map', function($parameters)
                             position: latlng
                         });
                         google.maps.event.addListener(marker, 'click', function(){
-                            infoWindow.setContent('<?= $sight_info ?>');
+                            infoWindow.setContent('<?php echo $sight_info ?>');
                             infoWindow.open(map, this);
                         });
-                        <?
+                        <?php
                     }
                 }
             }
@@ -90,6 +91,6 @@ add_shortcode('sightings-map', function($parameters)
         });
     </script>
 
-    <?
+    <?php
     });
 ?>

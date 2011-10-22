@@ -20,10 +20,8 @@ else {
 <div id="sightings_map_settings wrap">
     <div id="icon-options-general" class="icon32"><br /></div>
     <div id="donate_container" style="display:none">
-        <?php
-            insert_donate_button();
-        ?>
-        <span class="howto">Enjoying the Sightings plugin? It's free! Please consider a small donation to support it's development. :)</span>
+        <span class="howto">Enjoying the Sightings plugin? Please consider <a href="http://wordpress.org/extend/plugins/sightings/">rating it</a> to support it's development. :)<br/>
+        Or give a small <a href="http://webdez.se/donate">donation</a>?</span>
     </div>
     <h2 style="padding-top: 15px"><?php _e('Sightings settings',SIGHTINGS_HANDLE) ?></h2>
     <br />
@@ -54,17 +52,3 @@ else {
         jQuery('#donate_container').delay(5000).slideDown();
     });
 </script>
-
-<?php
-    function insert_donate_button() {
-    ?>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-        ">
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        </form>
-    <?
-}
-?>

@@ -34,28 +34,28 @@ if(isset($_REQUEST['debug'])) {
     if(isset($debug)) {
     ?>
     <div class="latlng_container">
-        <h4>Current view center</h4>
-        <?php _e('Latitude:'); ?> <span id="map_lat"></span>
+        <h4><?php _e('Current view center',SIGHTINGS_HANDLE) ?></h4>
+        <?php _e('Latitude:',SIGHTINGS_HANDLE); ?> <span id="map_lat"></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="map_lng"></span>
+        <?php _e('Longitude:',SIGHTINGS_HANDLE); ?> <span id="map_lng"></span>
     </div>
     <?php } ?>
     <div class="latlng_container status">
-        <h4>Marker</h4>
-        <?php _e('Latitude:'); ?> <span id="marker_lat"><?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?></span>
+        <h4><?php _e('Marker',SIGHTINGS_HANDLE) ?></h4>
+        <?php _e('Latitude:',SIGHTINGS_HANDLE); ?> <span id="marker_lat"><?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?></span>
         <br />
-        <?php _e('Longitude:'); ?> <span id="marker_lng"><?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?></span>
+        <?php _e('Longitude:',SIGHTINGS_HANDLE); ?> <span id="marker_lng"><?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?></span>
         <br />
-        <?php _e('Zoom:'); ?> <span id="map_zoom"><?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?></span>
+        <?php _e('Zoom:',SIGHTINGS_HANDLE); ?> <span id="map_zoom"><?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?></span>
     </div>
 
     <div class="post_options_container status">
-        <h4>Options</h4>
-        <label for="sightings_display_toggle"><? _e('Display map on post') ?>:</label>
+        <h4><?php _e('Options',SIGHTINGS_HANDLE) ?></h4>
+        <label for="sightings_display_toggle"><?php _e('Display map on post',SIGHTINGS_HANDLE) ?>:</label>
         <input id="sightings_display_toggle" type="checkbox" <?php echo isset($sighting['display']) ? 'checked="checked"' : '' ?>/>
     </div>
     <div class="use">
-        <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use'); ?></a>
+        <a href="#" class="button" onclick="confirmMarkerLatLng(); return false;"><?php _e('Use',SIGHTINGS_HANDLE); ?></a>
     </div>
     <div id="sightings-status">
         <div class="message" style="display: none;"></div>
@@ -111,7 +111,7 @@ if(isset($_REQUEST['debug'])) {
     function confirmMarkerLatLng() {
         if(jQuery('#marker_lat').html() == '') {
             animateBackground('#feef87','fast',false);
-            postStatusMessage('<?php _e('Please reposition the marker first') ?>',1000);
+            postStatusMessage('<?php _e('Please reposition the marker first',SIGHTINGS_HANDLE) ?>',1000);
         }
         else {
             doAjax();

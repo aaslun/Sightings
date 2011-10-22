@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sightings v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-18 23:07+0100\n"
-"PO-Revision-Date: 2011-10-18 23:07+0100\n"
+"POT-Creation-Date: 2011-10-18 23:11+0100\n"
+"PO-Revision-Date: 2011-10-18 23:11+0100\n"
 "Last-Translator: Andreas Lundgren <andreas.lundgren@norran.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,10 @@ msgstr ""
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:47
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:34
 msgid "Longitude:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:44
+msgid "Marker"
 msgstr ""
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:49

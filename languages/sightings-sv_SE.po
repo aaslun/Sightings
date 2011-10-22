@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sightings v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-18 22:36+0100\n"
-"PO-Revision-Date: 2011-10-18 22:45+0100\n"
+"POT-Creation-Date: 2011-10-18 23:11+0100\n"
+"PO-Revision-Date: 2011-10-18 23:12+0100\n"
 "Last-Translator: Andreas Lundgren <andreas.lundgren@norran.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,10 @@ msgstr "Geopositionen sparades!"
 msgid "Post ID not found! Marker location not saved."
 msgstr "Inläggets ID kunde inte hittas! Geopositionen sparades inte."
 
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:37
+msgid "Current view center"
+msgstr "Kartans mittpunkt"
+
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:38
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:45
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:32
@@ -33,9 +37,17 @@ msgstr "Latitud:"
 msgid "Longitude:"
 msgstr "Longitud:"
 
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:44
+msgid "Marker"
+msgstr "Markör"
+
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:49
 msgid "Zoom:"
 msgstr "Zoom:"
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:53
+msgid "Options"
+msgstr "Alternativ"
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:54
 msgid "Display map on post"
@@ -85,12 +97,12 @@ msgstr "Visa Sightings-karta på inlägg:"
 msgid "Save Changes"
 msgstr "Spara ändringar"
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:39
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:40
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:43
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:44
 msgid "Map"
 msgstr "Karta"
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:44
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:48
 msgid "Sightings"
 msgstr "Sightings"
 
