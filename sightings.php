@@ -56,8 +56,9 @@ add_action('init', function() {
         wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
         wp_enqueue_style(SIGHTINGS_HANDLE.'_style', plugin_dir_url(__FILE__).'sightings.css');
 
-        // Register shortcode
+        // Register shortcodes
         include __DIR__ . '/shortcode-sightings-map.php';
+        include __DIR__ . '/shortcode-contribute-form.php';
     });
 
 /*

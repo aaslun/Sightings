@@ -17,6 +17,8 @@ else {
 }
 ?>
 
+<div id="status_fail" style="display:none;"><?php _e('Settings are invalid! Only numeric values and dots are allowed. (no commas)', SIGHTINGS_HANDLE) ?></div>
+
 <div id="sightings_map_settings wrap">
     <div id="icon-options-general" class="icon32"><br /></div>
     <div id="donate_container" style="display:none">
@@ -25,10 +27,10 @@ else {
     </div>
     <h2 style="padding-top: 15px"><?php _e('Sightings settings',SIGHTINGS_HANDLE) ?></h2>
     <br />
-    <form name="sightins_settings" action="" method="post">
+    <form name="sightins_settings" action="" onsubmit="return validateSettings();" method="post">
         <h4><?php _e('Default map settings',SIGHTINGS_HANDLE) ?>:</h4>
         <span class="howto"><?php _e('The default position and zoom level for the maps on new posts.',SIGHTINGS_HANDLE) ?></span>
-        <table style="margin-bottom: 20px">
+        <table id="settings_table" style="margin-bottom: 20px">
             <tr><td><label for="map_lat"><?php _e('Latitude:',SIGHTINGS_HANDLE) ?></label></td>
                 <td><input name="map_lat" id="map_lat" type="text" size="10" value="<?php echo $option ? $option['lat'] : '' ?>"/></td></tr>
             <tr><td><label for="map_lng"><?php _e('Longitude:',SIGHTINGS_HANDLE) ?></label></td>
@@ -51,4 +53,20 @@ else {
         jQuery('#status_success').delay(3000).slideUp();
         jQuery('#donate_container').delay(5000).slideDown();
     });
+    
+    function validateSettings() {
+        if(/^[-+]?[0-9]*\.?[0-9]+$/.test(jQuery('#map_lat').val())
+                &&
+           /^[-+]?[0-9]*\.?[0-9]+$/.test(jQuery('#map_lng').val())
+                &&
+           /^[-+]?[0-9]*\.?[0-9]+$/.test(jQuery('#map_zoom').val())) {
+            return true;
+        }
+        else
+        {
+            jQuery('#status_fail').slideDown().delay(6000).slideUp();
+            jQuery('#settings_table').css('border','1px solid #f00');
+            return false;
+        }
+    }
 </script>

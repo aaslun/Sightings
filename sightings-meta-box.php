@@ -84,8 +84,8 @@ if(isset($_REQUEST['debug'])) {
 
         // Record map center on drag
         google.maps.event.addListener(map, 'drag', function() {
-            jQuery('#map_lat').html(Math.round(map.getCenter().lat()*1000)/1000);
-            jQuery('#map_lng').html(Math.round(map.getCenter().lng()*1000)/1000);
+            jQuery('#map_lat').html(Math.round(map.getCenter().lat()*10000)/10000);
+            jQuery('#map_lng').html(Math.round(map.getCenter().lng()*10000)/10000);
         });
 
         // Record map zoom level on zoom
@@ -95,8 +95,8 @@ if(isset($_REQUEST['debug'])) {
 
         // Reposition marker on mouse drag
         google.maps.event.addListener(marker, 'drag', function() {
-            jQuery('#marker_lat').html(Math.round(marker.getPosition().lat()*1000)/1000);
-            jQuery('#marker_lng').html(Math.round(marker.getPosition().lng()*1000)/1000);
+            jQuery('#marker_lat').html(Math.round(marker.getPosition().lat()*10000)/10000);
+            jQuery('#marker_lng').html(Math.round(marker.getPosition().lng()*10000)/10000);
         });
 
         // Clear marker div color on mouse drag start

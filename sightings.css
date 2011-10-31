@@ -58,7 +58,31 @@
     color: #000000;
 }
 
+#status_fail {
+    background-color: #ff9999;
+    padding: 5px;
+    width: 90%;
+    color: #000000;
+}
+
 #donate_container {
     float: right;
     width: 200px;
+}
+
+/* Sightings contribute form
+*/
+#sightings_form_table {
+    border: none !important;
+    width: auto !important;
+}
+
+#sightings_form_table tr td {
+    vertical-align: top;
+    border: none !important;
+    padding: 0 10px 0 0 !important;
+}
+
+#sightings_form_table td.marker {
+    font-size: 10px;
 }
