@@ -5,8 +5,6 @@
  * A submitted form will end up as a drafted post in the database.
  */
 
-
-
 add_shortcode('sightings-form', function() {
         $default_settings = get_option(SIGHTINGS_HANDLE);
         ?>

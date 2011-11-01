@@ -10,14 +10,11 @@
 
 add_shortcode('sightings-map', function($parameters)
     {
-        /**
-         * @var wpdb $wpdb
-         */
-        global $wpdb;
-        // Fetch all sightings from database
-        $sightings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_value, post_id FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ), ARRAY_A );
+        $manager = new Sightings_Manager();
 
-        $width = ''; // map width
+        $sightings = $manager->getAllSightings();
+
+        $width = ''; // map width$wpdb->get_results( $wpdb->prepare( "SELECT meta_value, post_id FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ), ARRAY_A );
         $height = ''; // map height
 
         extract(
