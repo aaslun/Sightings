@@ -6,35 +6,105 @@
  */
 
 add_shortcode('sightings-form', function() {
+
+        $sightings_post_array = array();
+
+        if(isset($_POST['sightings_title']) && $_POST['sightings_title'] != '') {
+            $sightings_post_array['title'] = $_POST['sightings_title'];
+        }
+
+        if(isset($_POST['sightings_body']) && $_POST['sightings_body'] != '') {
+            $sightings_post_array['body'] = $_POST['sightings_body'];
+        }
+
+        if(isset($_POST['marker_lat']) && $_POST['marker_lat'] != '') {
+            $sightings_post_array['lat'] = $_POST['marker_lat'];
+        }
+
+        if(isset($_POST['marker_lng']) && $_POST['marker_lng'] != '') {
+            $sightings_post_array['lng'] = $_POST['marker_lng'];
+        }
+
+        if(isset($_POST['map_zoom']) && $_POST['map_zoom'] != '') {
+            $sightings_post_array['zoom'] = $_POST['map_zoom'];
+        }
+
+        if(count($_POST) > 0) {
+            ?>
+        <div id="sightings_message">
+            <?php
+            // TODO: Perhaps some more distinct validation here
+            if(empty($sightings_post_array['title']) || empty($sightings_post_array['body']) || empty($sightings_post_array['lat']) || empty($sightings_post_array['lng']) || empty($sightings_post_array['zoom'])) {
+            echo '<p class="error">';
+            _e('The contribution was not submitted! You need to fill out the form completely.',SIGHTINGS_HANDLE);
+            echo '</p>';
+        }
+        else {
+            $manager = new Sightings_Manager();
+            $manager->createSightingsPost($sightings_post_array);
+
+            echo '<p class="success">';
+            _e('Thanks for your contribution! Your location has been submitted for review.',SIGHTINGS_HANDLE);
+            return;
+            echo '</p>';
+        }
+            ?>
+        </div>
+            <?php
+                        }
+
         $default_settings = get_option(SIGHTINGS_HANDLE);
+
         ?>
-    <form action="">
+    <div id="message"></div>
+    <form action="" method="post">
         <table id="sightings_form_table">
             <tr>
                 <td><label for="sightings_title"><?php _e('Title:',SIGHTINGS_HANDLE) ?></label></td>
-                <td><input id="sightings_title" type="text" size="50"/></td>
+                <td><input id="sightings_title" type="text" size="50" name="sightings_title"/></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="sightings_body"><?php _e('Description:',SIGHTINGS_HANDLE) ?></label></td>
-                <td><textarea id="sightings_body" rows="5" cols="50"></textarea></td>
+                <td><label for="sightings_body"><?php _e('Location description:',SIGHTINGS_HANDLE) ?></label></td>
+                <td><textarea id="sightings_body" rows="5" cols="50" name="sightings_body"></textarea></td>
                 <td class="marker"><strong><?php _e('Marker',SIGHTINGS_HANDLE) ?>:</strong><br/>
-            <?php _e('Latitude:',SIGHTINGS_HANDLE); ?> <span id="marker_lat"><?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?></span>
-            <br />
-            <?php _e('Longitude:',SIGHTINGS_HANDLE); ?> <span id="marker_lng"><?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?></span>
-            <br />
-            <?php _e('Zoom:',SIGHTINGS_HANDLE); ?> <span id="map_zoom"><?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?></span><br/>
-                <input name="save" type="submit" class="button-primary" value="<?php _e('Submit') ?>"/>
+                    <?php _e('Latitude:',SIGHTINGS_HANDLE) ?> <span id="marker_lat"><?php echo $default_settings['lat'] ?></span>
+                    <input type="hidden" id="marker_lat_hidden" name="marker_lat">
+                    <br />
+                    <?php _e('Longitude:',SIGHTINGS_HANDLE) ?> <span id="marker_lng"><?php echo $default_settings['lng'] ?></span>
+                    <input type="hidden" id="marker_lng_hidden" name="marker_lng">
+                    <br />
+                    <?php _e('Zoom:',SIGHTINGS_HANDLE) ?> <span id="map_zoom"><?php echo $default_settings['zoom'] ?></span><br/>
+                    <input type="hidden" id="map_zoom_hidden" name="map_zoom">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="contributor_name"><?php _e('Your name:',SIGHTINGS_HANDLE) ?></label></td>
+                <td><input id="contributor_name" type="text" size="50" name="contributor_name"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="contributor_email"><?php _e('Your e-mail:',SIGHTINGS_HANDLE) ?></label></td>
+                <td><input id="contributor_email" type="text" size="50" name="contributor_email"/></td>
+                <td></td>
+            </tr>
+        </table>
+        <p class="info"><?php _e('Drag-and-drop the marker to your desired position on the map',SIGHTINGS_HANDLE) ?></p>
+        <table id="sightings_map_table">
+            <tr>
+                <td><label for="map_canvas"><?php _e('Map',SIGHTINGS_HANDLE) ?>:</label></td>
+                <td id="map_canvas" style="width:100%; height:400px;"></td>
+                <td>
+                    <input name="save" type="submit" class="button-primary" value="<?php _e('Submit') ?>"/>
                 </td>
             </tr>
         </table>
-        <div id="map_canvas" style="width:100%; height:400px;"></div>
         <script type="text/javascript">
             // Load the map
-            jQuery(window).load(function(){
-                var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : $default_settings['lat'] ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : $default_settings['lng'] ?>);
+            jQuery(document).ready(function(){
+                var latlng = new google.maps.LatLng(<?php echo $default_settings['lat'] .', '. $default_settings['lng'] ?>);
                 var myOptions = {
-                    zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : $default_settings['zoom'] ?>,
+                    zoom: <?php echo $default_settings['zoom'] ?>,
                     center: latlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -51,12 +121,16 @@ add_shortcode('sightings-form', function() {
                 // Record map zoom level on zoom
                 google.maps.event.addListener(map, 'zoom_changed', function() {
                     jQuery('#map_zoom').html(map.getZoom());
+                    jQuery('#map_zoom_hidden').val(map.getZoom());
                 });
 
-                // Reposition marker on mouse drag
+                // Reposition marker on mouse drag.
                 google.maps.event.addListener(marker, 'drag', function() {
                     jQuery('#marker_lat').html(Math.round(marker.getPosition().lat()*10000)/10000);
+                    jQuery('#marker_lat_hidden').val(Math.round(marker.getPosition().lat()*10000)/10000);
                     jQuery('#marker_lng').html(Math.round(marker.getPosition().lng()*10000)/10000);
+                    jQuery('#marker_lng_hidden').val(Math.round(marker.getPosition().lng()*10000)/10000);
+
                 });
 
                 // Clear marker div color on mouse drag start
@@ -65,65 +139,6 @@ add_shortcode('sightings-form', function() {
                 });
             });
 
-            /**
-             * Check if ready to save
-             */
-            function confirmMarkerLatLng() {
-                if(jQuery('#marker_lat').html() == '') {
-                    animateBackground('#feef87','fast',false);
-                    postStatusMessage('<?php _e('Please reposition the marker first',SIGHTINGS_HANDLE) ?>',1000);
-                }
-                else {
-                    doAjax();
-                }
-            }
-
-            /**
-             * Animate background color for marker info box
-             * Useful for emphasizing message status
-             * @param color
-             * @param speed
-             * @param pause
-             */
-            function animateBackground( color , speed , pause ) {
-                jQuery('.status').animate({backgroundColor:color}, speed, 'linear', function() {
-                    if(!pause) {
-                        jQuery(this).animate({
-                            backgroundColor: '#ffffff'
-                        }, speed, 'linear', function() {
-                            jQuery(this).css('background', 'none');
-                        })
-                    }
-                })
-            }
-
-            /**
-             * Displays a text message in the Map meta box for a duration in milliseconds
-             * @param message
-             * @param duration
-             */
-            function postStatusMessage( message , duration ) {
-                jQuery('#sightings-status .message').html(message).fadeIn('fast').delay(duration).fadeOut('slow');
-            }
-
-            /**
-             * Save marker latitude, longitude and map zoom level to database
-             */
-            function doAjax() {
-                jQuery.ajax({
-                    url : '<?php echo SIGHTINGS_PLUGIN_DIR ?>sightings-ajax.php',
-                    data : 'lat='+jQuery('#marker_lat').html()+'&lng='+jQuery('#marker_lng').html()+'&zoom='+jQuery('#map_zoom').html()+'&post_id=<?php echo the_ID(); ?>&display='+jQuery('#sightings_display_toggle').is(':checked'),
-                    type : 'POST',
-                    beforeSend : function(html) {
-                        jQuery('#sightings-status').hide().append('<img id="sightings_loader" src="<?php echo SIGHTINGS_PLUGIN_DIR ?>images/loading.gif" alt="loading" />').fadeIn();
-                    },
-                    success : function(html) {
-                        animateBackground('#99ff99','slow',true);
-                        postStatusMessage(html,2000);
-                        jQuery('#sightings-status').find('img:last').fadeOut();
-                    }
-                });
-            }
         </script>
     </form>
     <?

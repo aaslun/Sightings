@@ -42,44 +42,9 @@ load_plugin_textdomain(SIGHTINGS_HANDLE, false, dirname( plugin_basename( __FILE
 require_once __DIR__ . '/class-sightings.php';
 
 /*
- * Admin actions
+ * Filters and actions
  */
-
-// Enqueue scripts and style
-add_action('init', function() {
-        wp_enqueue_script('jquery');
-        wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
-        wp_enqueue_style(SIGHTINGS_HANDLE.'_style', plugin_dir_url(__FILE__).'sightings.css');
-
-        // Register shortcodes
-        include __DIR__ . '/shortcode-sightings-map.php';
-        include __DIR__ . '/shortcode-contribute-form.php';
-    });
-
-// Post & page admin meta boxes
-add_action('add_meta_boxes', function() {
-        add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'post', 'normal', 'high');
-        add_meta_box(SIGHTINGS_HANDLE, __('Map', SIGHTINGS_HANDLE), 'sightings_meta_box', 'page', 'normal', 'high');
-    });
-
-// Admin menu item
-add_action('admin_menu', function() {
-        add_options_page('Sightings',__('Sightings', SIGHTINGS_HANDLE),'manage_options','sightings-settings','sightings_menu_page');
-    });
-
-/*
- * Filter to echo the post map
- */
-add_filter('comments_template',function($content) {
-        if(is_single()) {
-            global $post;
-            $sighting = get_post_meta($post->ID,SIGHTINGS_HANDLE,true);
-            if(isset($sighting['display'])) {
-                return $content . echo_sightings_post_map($sighting);
-            }
-        }
-        return $content;
-    });
+require_once __DIR__ . '/filters.php';
 
 /**
  * Function for creating the sightings meta box in admin
@@ -100,40 +65,4 @@ function sightings_meta_box() {
 function sightings_menu_page() {
     // include sightings settings template file
     require_once __DIR__ . '/sightings-settings.php';
-}
-
-/**
- * Echo the Sightings post map
- * @param $sighting
- * @return void
- */
-function echo_sightings_post_map($sighting) {
-    ?>
-<div id="map_canvas" style="width:100%; height:200px;"></div>
-<script type="text/javascript">
-    // Load the map
-    jQuery(window).load(function(){
-        var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : '' ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : '' ?>);
-        var myOptions = {
-            zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
-            center: latlng,
-            draggable: false,
-            zoomControl: false,
-            scrollwheel: false,
-            streetViewControl: false,
-            panControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById('map_canvas'),
-                myOptions);
-
-        var marker = new google.maps.Marker({
-            map:map,
-            draggable:false,
-            animation: google.maps.Animation.DROP,
-            position:latlng
-        });
-    });
-</script>
-<?php
 }

@@ -72,9 +72,37 @@
 
 /* Sightings contribute form
 */
+#sightings_message {
+    background-color: #ffffe0;
+    border-color: #E6DB55;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 .6em;
+    margin-bottom: 30px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+#sightings_message p {
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: 0 3px;
+    padding-left: 25px;
+}
+
+#sightings_message p.success {
+    background-image: url("images/success.png");
+}
+
+#sightings_message p.error {
+    background-image: url("images/error.png");
+}
+
 #sightings_form_table {
     border: none !important;
     width: auto !important;
+    margin-bottom: 0 !important;
 }
 
 #sightings_form_table tr td {
@@ -83,6 +111,18 @@
     padding: 0 10px 0 0 !important;
 }
 
-#sightings_form_table td.marker {
+#sightings_form_table tr td label {
+    float: right;
+}
+
+#sightings_form_table td.marker{
     font-size: 10px;
+}
+
+p.info {
+    background-image: url("images/info.png");
+    background-repeat: no-repeat;
+    background-position: 0 3px;
+    padding-left: 25px;
+    margin: 0;
 }
