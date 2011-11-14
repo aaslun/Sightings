@@ -2,8 +2,6 @@
 
 class Sightings_Manager {
 
-    private $settings;
-
     function __construct() {
 
     }
@@ -75,9 +73,30 @@ class Sightings_Manager {
             throw new Exception('Could not create new Sighting');
         }
     }
-
+    /**
+     * Updates Sighting for a post
+     * @param $post_id
+     * @param $sighting
+     * @return bool true|false was updated
+     */
     public function saveSightingPostMeta($post_id, $sighting) {
-            update_post_meta($post_id,SIGHTINGS_HANDLE,$sighting);
+        return update_post_meta($post_id,SIGHTINGS_HANDLE,$sighting);
     }
 
+    /**
+     * Updates Sightings settings
+     * @param $settings array
+     * @return bool true|false was updated
+     */
+    public function saveSightingsSettings($settings) {
+        return update_option(SIGHTINGS_HANDLE, $settings);
+    }
+
+    /**
+     * Returns the Sightings settings array from database
+     * @return array
+     */
+    public function getSightingsSettings() {
+        return get_option(SIGHTINGS_HANDLE);
+    }
 }

@@ -70,6 +70,26 @@
     width: 200px;
 }
 
+th.cats_header {
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
+}
+
+div.tables_container {
+    overflow: auto;
+    border: 2px dashed #CCC;
+    width: 50%;
+    padding: 10px;
+}
+
+table#available_categories {
+    float: left;
+}
+
+table#contributor_categories tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
 /* Sightings contribute form
 */
 #sightings_message {
