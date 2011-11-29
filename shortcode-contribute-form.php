@@ -7,6 +7,8 @@
 
 add_shortcode('sightings-form', function() {
 
+        $manager = new Sightings_Manager();
+
         $sightings_post_array = array();
 
         if(isset($_POST['sightings_title']) && $_POST['sightings_title'] != '') {
@@ -29,31 +31,42 @@ add_shortcode('sightings-form', function() {
             $sightings_post_array['zoom'] = $_POST['map_zoom'];
         }
 
+        if(isset($_POST['sightings_category']) && $_POST['sightings_category'] != '') {
+            $sightings_post_array['category'] = $_POST['sightings_category'];
+        }
+
+        if(isset($_POST['contributor_name']) && $_POST['contributor_name'] != '') {
+            $sightings_post_array['name'] = $_POST['contributor_name'];
+        }
+
+        if(isset($_POST['contributor_email']) && $_POST['contributor_email'] != '') {
+            $sightings_post_array['email'] = $_POST['contributor_email'];
+        }
+
         if(count($_POST) > 0) {
             ?>
         <div id="sightings_message">
             <?php
             // TODO: Perhaps some more distinct validation here
-            if(empty($sightings_post_array['title']) || empty($sightings_post_array['body']) || empty($sightings_post_array['lat']) || empty($sightings_post_array['lng']) || empty($sightings_post_array['zoom'])) {
+            if(empty($sightings_post_array['title']) || empty($sightings_post_array['body']) || empty($sightings_post_array['lat']) || empty($sightings_post_array['lng']) || empty($sightings_post_array['zoom']) || empty($sightings_post_array['name']) || empty($sightings_post_array['email'])) {
             echo '<p class="error">';
             _e('The contribution was not submitted! You need to fill out the form completely.',SIGHTINGS_HANDLE);
             echo '</p>';
         }
         else {
-            $manager = new Sightings_Manager();
             $manager->createSightingsPost($sightings_post_array);
 
             echo '<p class="success">';
-            _e('Thanks for your contribution! Your location has been submitted for review.',SIGHTINGS_HANDLE);
-            return;
+            _e('Thanks for your contribution! It has now been submitted for review.',SIGHTINGS_HANDLE);
             echo '</p>';
+            return;
         }
             ?>
         </div>
             <?php
                         }
 
-        $default_settings = get_option(SIGHTINGS_HANDLE);
+        $default_settings = $manager->getSightingsSettings();
 
         ?>
     <div id="message"></div>
@@ -64,6 +77,20 @@ add_shortcode('sightings-form', function() {
                 <td><input id="sightings_title" type="text" size="50" name="sightings_title"/></td>
                 <td></td>
             </tr>
+            <?php if(isset($default_settings['contributor_categories'])) : ?>
+            <tr>
+                <td><label for="sightings_category"><?php _e('Category:',SIGHTINGS_HANDLE) ?></label></td>
+                <td>
+                    <select id="sightings_category" name="sightings_category">
+                        <?php
+                        foreach($default_settings['contributor_categories'] as $cat) {
+                            echo '<option value="'.$cat.'">'.get_cat_name($cat).'</option>';
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <?php endif; ?>
             <tr>
                 <td><label for="sightings_body"><?php _e('Location description:',SIGHTINGS_HANDLE) ?></label></td>
                 <td><textarea id="sightings_body" rows="5" cols="50" name="sightings_body"></textarea></td>
@@ -99,6 +126,7 @@ add_shortcode('sightings-form', function() {
                 </td>
             </tr>
         </table>
+
         <script type="text/javascript">
             // Load the map
             jQuery(document).ready(function(){

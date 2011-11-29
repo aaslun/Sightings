@@ -8,7 +8,13 @@ if(count($_POST) > 0)
     $settings['lng'] = $_POST['map_lng'];
     $settings['zoom'] = $_POST['map_zoom'];
     $settings['display'] = isset($_POST['display']) ? 1 : 0;
-    _log($_POST['contributor_categories']);
+    if(isset($_POST['contributor_categories']))
+        $settings['contributor_categories'] = $_POST['contributor_categories'];
+    if(isset($_POST['author']))
+        $settings['author'] = $_POST['author'];
+    if(isset($_POST['notify_user']))
+        $settings['notify_user'] = $_POST['notify_user'];
+
 
     if(count($settings) > 0) {
         $manager->saveSightingsSettings($settings);
@@ -56,14 +62,14 @@ else {
         <hr/>
         <h3><?php _e('Contribution settings',SIGHTINGS_HANDLE) ?></h3>
         <h4><?php _e('Author',SIGHTINGS_HANDLE); ?>:</h4>
-        <span class="howto"><?php _e('The user that will be set as author on contributor posts.',SIGHTINGS_HANDLE) ?></span>
+        <span class="howto"><?php _e('This user that will be set as author on contributor posts.',SIGHTINGS_HANDLE) ?></span>
         <table id="contributions_table" style="margin-bottom: 20px">
             <tr>
                 <td>
                     <label for="users"><?php _e('Post as user:',SIGHTINGS_HANDLE) ?></label>
                 </td>
                 <td>
-                    <select id="users">
+                    <select id="users" name="author">
 <?php
                         global $wpdb;
     $query = "SELECT ID, user_nicename from $wpdb->users ORDER BY user_nicename";
@@ -74,6 +80,7 @@ else {
     ?>
                     </select>
                 </td>
+                <td style="padding-left:20px;"><input id="notify_user" name="notify_user" type="checkbox" <?php echo isset($settings['notify_user']) ? 'checked="checked"' : '' ?>/>&nbsp;<label for="notify_user"><?php _e('Send notification e-mail to user when someone submits a new contribution') ?></label></td>
             </tr>
         </table>
         <h4><?php _e('Contributor categories',SIGHTINGS_HANDLE); ?>:</h4>
@@ -113,7 +120,11 @@ else {
                     </th>
                 </tr>
                 <?php
-                isset($settings['contributor_categories']);
+                if(isset($settings['contributor_categories'])) {
+                    foreach($settings['contributor_categories'] as $cat) {
+                        echo '<tr><td>'.get_cat_name($cat).'</td><td><a href="#" onclick="removeCategory(jQuery(this)); return false;"> [- '. __('Remove', SIGHTINGS_HANDLE) .']</a><input type="hidden" name="contributor_categories[]" value="'.$cat.'" /></td></tr>';
+                    }
+                }
                 ?>
             </table>
         </div>
