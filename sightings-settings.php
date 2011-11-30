@@ -80,7 +80,7 @@ else {
     ?>
                     </select>
                 </td>
-                <td style="padding-left:20px;"><input id="notify_user" name="notify_user" type="checkbox" <?php echo isset($settings['notify_user']) ? 'checked="checked"' : '' ?>/>&nbsp;<label for="notify_user"><?php _e('Send notification e-mail to user when someone submits a new contribution') ?></label></td>
+                <td style="padding-left:20px;"><input id="notify_user" name="notify_user" type="checkbox" <?php echo isset($settings['notify_user']) ? 'checked="checked"' : '' ?>/>&nbsp;<label for="notify_user"><?php _e('Send notification e-mail to user when someone submits a new contribution', SIGHTINGS_HANDLE) ?></label></td>
             </tr>
         </table>
         <h4><?php _e('Contributor categories',SIGHTINGS_HANDLE); ?>:</h4>

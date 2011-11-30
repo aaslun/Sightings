@@ -71,8 +71,9 @@ class Sightings_Manager {
         if($new_post_id  != 0) {
             $sightings_post_array['display'] = true;
             if(self::saveSightingPostMeta($new_post_id, $sightings_post_array))
-                if(isset($default_settings['notify_user']))
-                    self::notifyAuthorAboutNewContribution($default_settings['author'], $sightings_post_array);
+                if(isset($default_settings['notify_user'])) {
+                    self::notifyAuthorAboutNewContribution($default_settings['author'], $sightings_post_array, $new_post_id);
+                }
                 else{
                     throw new Exception('Could not save Sightings post meta for post ID: '.$new_post_id);
                 }
@@ -108,7 +109,7 @@ class Sightings_Manager {
         return get_option(SIGHTINGS_HANDLE);
     }
 
-    public function notifyAuthorAboutNewContribution($author_id, $sightings_post_array) {
+    public function notifyAuthorAboutNewContribution($author_id, $sightings_post_array, $new_post_id) {
 
         $user = get_userdata($author_id);
 
@@ -133,6 +134,7 @@ class Sightings_Manager {
                       <p><strong>zoom:'.$sightings_post_array['zoom'].'</strong></p>
                       <br/>
                       <p>'._e('Contributor e-mail: ',SIGHTINGS_HANDLE).'<a href="mailto:'.$sightings_post_array['email'].'">'.$sightings_post_array['email'].'</a></p>
+                      <p>'._e('Click here to see the post:',SIGHTINGS_HANDLE).'<a href="'.get_post_permalink($new_post_id).'">'.get_post_permalink($new_post_id).'</a>
                     </body>
                     </html>
                     ';

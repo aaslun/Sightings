@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sightings v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-18 23:11+0100\n"
-"PO-Revision-Date: 2011-10-18 23:11+0100\n"
+"POT-Creation-Date: 2011-11-30 17:49+0100\n"
+"PO-Revision-Date: 2011-11-30 17:49+0100\n"
 "Last-Translator: Andreas Lundgren <andreas.lundgren@norran.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,36 +13,98 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings\n"
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-ajax.php:27
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:123
+msgid "New Sightings contribution from "
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:136
+msgid "Contributor e-mail: "
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:137
+msgid "Click here to see the post:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/filters.php:20
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/filters.php:21
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:122
+msgid "Map"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/filters.php:26
+msgid "Sightings"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:53
+msgid "The contribution was not submitted! You need to fill out the form completely."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:60
+msgid "Thanks for your contribution! It has now been submitted for review."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:76
+msgid "Title:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:82
+msgid "Category:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:95
+msgid "Location description:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:97
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:44
+msgid "Marker"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:98
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:38
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:45
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:47
+msgid "Latitude:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:101
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:40
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:47
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:49
+msgid "Longitude:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:104
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:49
+msgid "Zoom:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:109
+msgid "Your name:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:114
+msgid "Your e-mail:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:119
+msgid "Drag-and-drop the marker to your desired position on the map"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/shortcode-contribute-form.php:125
+msgid "Submit"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-ajax.php:29
 msgid "Marker location saved!"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-ajax.php:30
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-ajax.php:32
 msgid "Post ID not found! Marker location not saved."
 msgstr ""
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:37
 msgid "Current view center"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:38
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:45
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:32
-msgid "Latitude:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:40
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:47
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:34
-msgid "Longitude:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:44
-msgid "Marker"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:49
-msgid "Zoom:"
 msgstr ""
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-meta-box.php:53
@@ -61,48 +123,89 @@ msgstr ""
 msgid "Please reposition the marker first"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:12
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:23
 msgid "Settings saved successfully"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:26
-msgid "Sightings settings"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:29
-msgid "Default map settings"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:30
-msgid "The default position and zoom level for the maps on new posts."
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:36
-msgid "Zoom level:"
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:31
+msgid "Settings are invalid! Only numeric values and dots are allowed. (no commas)"
 msgstr ""
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:39
-msgid "Default display settings"
+msgid "Sightings settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:40
-msgid "Toggles whether the map should be displayed or not by default on new posts."
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:43
+msgid "Map settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:42
-msgid "Display sightings maps on posts:"
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:44
+msgid "Default map settings"
 msgstr ""
 
 #: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:45
+msgid "The default position and zoom level for the maps on new posts."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:51
+msgid "Zoom level:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:55
+msgid "Default display settings"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:56
+msgid "Toggles whether the map should be displayed or not by default on new posts."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:58
+msgid "Display sightings maps on posts:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:63
+msgid "Contribution settings"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:64
+msgid "Author"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:65
+msgid "This user that will be set as author on contributor posts."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:69
+msgid "Post as user:"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:83
+msgid "Send notification e-mail to user when someone submits a new contribution"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:86
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:119
+msgid "Contributor categories"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:87
+msgid "Select the categories you want to be available for contributors."
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:92
+msgid "Available categories"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:111
+msgid "Add"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:125
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:184
+msgid "Remove"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings-settings.php:134
 msgid "Save Changes"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:43
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:44
-msgid "Map"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/sightings.php:48
-msgid "Sightings"
 msgstr ""
 

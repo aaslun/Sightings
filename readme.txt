@@ -1,7 +1,7 @@
 === Sightings ===
 Author: Andreas Lundgren (webdez)
 Contributors: webdez
-Tags: geotagging, geolocation, geolocate, geotag, placemark, sightings, sight, maps, google maps
+Tags: geotagging, geolocation, geolocate, geotag, place, location, gps, placemark, sightings, map, crowd sourcing, maps, google maps
 Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: trunk
@@ -14,7 +14,8 @@ Sightings is an easy to use plug-in that lets you geo-tag any post or page in Wo
 
 The purpose of Sightings is to connect any post or page with a map of a specific location.
 Sightings is an easy to use plug-in that utilizes the Google Maps v3 JavaScript API to let you geo-tag any post or page in your WordPress installation.
-You can display all your recorded sightings on a larger map by using the shortcode: [sightings-map] on any post or page.
+Since version 1.2 you can even let your visitors submit their own geotagged places through a contribution form! Just use the shortcode: [sightings-form] on any post or page.
+Display all your recorded sightings on a larger map by using the shortcode: [sightings-map] on any post or page.
 
 Example of situations where you'd find Sightings useful, if:
 
@@ -23,7 +24,7 @@ Example of situations where you'd find Sightings useful, if:
 * you're blogging about the latest trip you took to a city or a nice place where you've been on vacation
 * you want to give directions to someone about something connected to what you are writing
 
-You can probably come up with other useful ways to use Sightings!
+You can surely come up with other useful ways to use Sightings!
 
 Requirements:
 
@@ -53,6 +54,14 @@ Click the "Use" button.
 Save/Publish your post.
 View the post, the map should now be displayed at the bottom of your post, above the comments.
 
+= How do I let my visitors submit their own Sightings? =
+
+On any post or page, type in the text: [sightings-form]
+Publish the post or page.
+On the published page a form will now appear that allows your visitors to submit geotagged locations along with some descriptive text and user information.
+Every submission is imported into your blog as a drafted post, awaiting your approval. Just change the post status to "published" if you want it to appear publicly on your blog along with your other sightings.
+It is highty recommended that you configure the Sightings settings in admin first. Here you can also choose to recieve e-mails when someone submits a new sighting through the form.
+
 = How do i display all markers on a larger map? =
 
 First, make sure that you have created some posts, positioned and saved the geolocations on the maps.
@@ -77,7 +86,15 @@ Thanks!
 
 3. The Sighings settings page in wp-admin.
 
+4. The Sightings contribution form displayed on a page in the Twenty Ten theme.
+
 == Changelog ==
+
+= 1.2 =
+* Crowd sourcing feature: let your visitors submit their own sightings through a contributor form
+* Fixed some minor bugs
+* Improved validation to reduce risk of user error
+* Rewritten Sightings core to support a more object oriented approach to make code easier to maintain and develop
 
 = 1.1 =
 * Multiple language support
@@ -91,6 +108,9 @@ Thanks!
 * Initial release. Basic functionality.
 
 == Upgrade Notice ==
+
+= 1.2 =
+New crowd sourcing features, bug fixes and better form validation.
 
 = 1.1 =
 Now support for multiple languages. Added Swedish text domain. Replaced all short open tags for increased PHP compatibility.
