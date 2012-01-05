@@ -12,7 +12,6 @@ function sightings_init_style() {
 
         // Register shortcodes
         include __DIR__ . '/shortcode-sightings-map.php';
-        include __DIR__ . '/shortcode-contribute-form.php';
     };
 add_action('init', 'sightings_init_style');
 
@@ -45,5 +44,5 @@ function sightings_echo_post_map($content) {
         }
         return $content;
     };
-add_filter('the_complete_title','sightings_echo_post_map');
+add_filter('the_content','sightings_echo_post_map');
 

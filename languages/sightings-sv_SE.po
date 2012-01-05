@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sightings v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 11:54+0100\n"
-"PO-Revision-Date: 2012-01-03 11:58+0100\n"
+"POT-Creation-Date: 2012-01-05 15:29+0100\n"
+"PO-Revision-Date: 2012-01-05 15:29+0100\n"
 "Last-Translator: Andreas Lundgren <andreas.lundgren@norran.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -229,7 +229,7 @@ msgid "Drag-and-drop the marker to your desired position on the map"
 msgstr "Dra-och-släpp markören på kartan där platsen du beskriver finns."
 
 #: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:125
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:204
+#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:205
 msgid "Submit"
 msgstr "Skicka"
 
@@ -241,19 +241,19 @@ msgstr "Bidra med en position"
 msgid "Responses received"
 msgstr "Inkomna svar"
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:188
+#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:189
 msgid "Title"
 msgstr "Rubrik"
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:189
+#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:190
 msgid "Description"
 msgstr "Platsbeskrivning"
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:197
+#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:198
 msgid "Category"
 msgstr "Kategori"
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:216
+#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:223
 msgid "<p>Drag me and klick me!</p>"
 msgstr "<p>Klicka eller dra-och-släpp mig!</p>"
 

@@ -14,7 +14,7 @@ Sightings easily lets you, or your readers, geo-tag any post or page in WordPres
 
 The purpose of Sightings is to connect any post or page with a map of a specific location.
 Sightings is an easy to use plug-in that utilizes the Google Maps v3 JavaScript API to let you geo-tag any post or page in your WordPress installation.
-Since version 1.2 you can even let your visitors submit their own geotagged places through a contribution form! Just use the shortcode: [sightings-form] on any post or page.
+Since version 1.2 you can even let your visitors submit their own geotagged places through a contribution form on the [sightings-map]!
 Display all your recorded sightings on a larger map by using the shortcode: [sightings-map] on any post or page.
 
 Example of situations where you'd find Sightings useful, if:
@@ -54,11 +54,12 @@ Click the "Use" button.
 Save/Publish your post.
 View the post, the map should now be displayed at the bottom of your post, above the comments.
 
-= How do I let my visitors submit their own Sightings? =
+= How do I let my visitors submit their own location markers? =
 
-On any post or page, type in the text: [sightings-form]
+On any post or page, type in the text: [sightings-map]
 Publish the post or page.
-On the published page a form will now appear that allows your visitors to submit geotagged locations along with some descriptive text and user information.
+On the published page a map will now appear that allows your visitors to contribute geotagged locations along with some descriptive text and user information.
+Click on the "[+] Contribute with a location" link at the bottom of the map. A marker will appear. Drag it to desired location. Click it and enter location information. Click "Submit".
 Every submission is imported into your blog as a drafted post, awaiting your approval. Just change the post status to "published" if you want it to appear publicly on your blog along with your other sightings.
 It is highty recommended that you configure the Sightings settings in admin first. Here you can also choose to recieve e-mails when someone submits a new sighting through the form.
 
@@ -90,12 +91,15 @@ Thanks!
 
 == Changelog ==
 
-= 1.2.1 =
-* Bugfixes: Contributor categories was fetched wrong. Contributor author was not selected on load.
+= 1.3 =
+* Sightings post maps are now displayed at the top of the post instead of at the bottom.
+* Removed the old contribution form and shortcode. You can now leave a contribution by dropping a marker directly on the [sightings-map].
+* Support for connecting with Gravity Forms to display number of replies on a form used on a Sight, if you have it installed.
+* Bugfixes: Contributor categories was fetched wrong. Selected contributor author was not set on load.
 * Improved plugin file structure offers better overview.
 * Replaced lambda functions in filters.php for better PHP compatibility.
 * Better Swedish translations.
-* Support for width, height, zoom, scrollwheel, draggable and catID attributes on the [sightings-map] shortcode.
+* Support for allow_contributors, width, height, zoom, scrollwheel, draggable, cat_slug and cat_id attributes on the [sightings-map] shortcode.
 
 = 1.2 =
 * Crowd sourcing feature: let your visitors submit their own sightings through a contributor form
@@ -116,8 +120,8 @@ Thanks!
 
 == Upgrade Notice ==
 
-= 1.2.1 =
-Important bug-fixes for contributor categories, and much more. See plugin readme.txt file for full changelog.
+= 1.3 =
+Contributor shortcode removed and merged into Sightings map shortcode. Important bug-fixes for contributor categories, and much more. See plugin readme.txt file for full changelog.
 
 = 1.2 =
 New crowd sourcing features, bug fixes and better form validation.

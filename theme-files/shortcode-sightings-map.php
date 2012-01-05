@@ -9,6 +9,7 @@
  *  zoom     -  Set zoom level
  *  cat_id -  Set category ID for posts to be displayed on map (will inherit sub categories). Will display all if not used.
  *  cat_slug -  Set category slug for posts to be displayed on map (will inherit sub categories). Will display all if not used.
+ *  allow_contributors - If contributor link should be visible or not. Visible by default.
  */
 
 function sightings_map_function($parameters) {
@@ -24,7 +25,7 @@ function sightings_map_function($parameters) {
 
     extract(
         shortcode_atts(
-            array(
+            array( // Default attribute values for the sightings-map
                 'width' =>  '100%',
                 'height'=>  '400px',
                 'zoom'  =>  '6',
@@ -38,10 +39,6 @@ function sightings_map_function($parameters) {
     $sightings_post_array = array();
 
     // If contribution form was posted, create new post
-
-
-    _log($_POST);
-
     if(isset($_POST['sightings_title']) && $_POST['sightings_title'] != '') {
         $sightings_post_array['title'] = $_POST['sightings_title'];
     }
@@ -157,6 +154,8 @@ function sightings_map_function($parameters) {
 
                     if($sight != '' && $sight->post_status == 'publish') {
                         $sight_info = '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
+                        $sight_categories = wp_get_post_categories($sight->ID);
+                        $sight_info .= '<p>'.get_cat_name($sight_categories[0]).'</p>';
                         if(isset($sight_meta['gf_id']))
                         { // START Gravity Forms optional features
                             $num_submits = RGFormsModel::get_form_counts($sight_meta['gf_id']);
@@ -180,8 +179,16 @@ function sightings_map_function($parameters) {
                 }
             } ?>
             jQuery('.sightings_contributor_panel a').one('click', function() {
-                var markerImage = new google.maps.MarkerImage('http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png'); // TODO: Change this to own hosted image
-                var markerShadow = new google.maps.MarkerImage('<?php echo SIGHTINGS_PLUGIN_DIR_URL ?>/images/marker-shadow.png');
+                var markerImage = new google.maps.MarkerImage('<?php echo SIGHTINGS_PLUGIN_DIR_URL ?>/images/blue-marker.png',
+                      new google.maps.Size(32,32),
+                      new google.maps.Point(0,0),
+                      new google.maps.Point(16,32)
+                );
+                var markerShadow = new google.maps.MarkerImage('<?php echo SIGHTINGS_PLUGIN_DIR_URL ?>/images/marker-shadow.png',
+                      new google.maps.Size(52,32),
+                      new google.maps.Point(0,0),
+                      new google.maps.Point(16,32)
+                );
 
                 var infoWindow = new google.maps.InfoWindow ();
                 <?php // Setup the contributor form
@@ -222,9 +229,9 @@ function sightings_map_function($parameters) {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                     infoWindow.setContent('<?php _e('<p>Drag me and klick me!</p>',SIGHTINGS_HANDLE) ?>');
                     infoWindow.open(map, marker);
-                    setTimeout(stopAnimation,1000);
+                    setTimeout(stopAnimation,500);
                 };
-                setTimeout(greet,500);
+                setTimeout(greet,1000);
 
 
                 google.maps.event.addListener(marker, 'click', function(){
