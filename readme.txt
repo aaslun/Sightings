@@ -1,14 +1,14 @@
 === Sightings ===
 Author: Andreas Lundgren (webdez)
 Contributors: webdez
-Tags: geotagging, geolocation, geolocate, geotag, place, location, gps, placemark, sightings, map, crowd sourcing, maps, google maps
+Tags: geotagging, geolocation, geolocate, geotag, place, location, gps, placemark, sightings, map, crowd sourcing, crowdsourcing, maps, google maps
 Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: trunk
 License: GPLv2 or later
 Donate link: http://webdez.se/donate/
 
-Sightings is an easy to use plug-in that lets you geo-tag any post or page in WordPress and display them on Google maps in your blog.
+Sightings easily lets you, or your readers, geo-tag any post or page in WordPress and them on maps in your blog.
 
 == Description ==
 
@@ -90,6 +90,13 @@ Thanks!
 
 == Changelog ==
 
+= 1.2.1 =
+* Bugfixes: Contributor categories was fetched wrong. Contributor author was not selected on load.
+* Improved plugin file structure offers better overview.
+* Replaced lambda functions in filters.php for better PHP compatibility.
+* Better Swedish translations.
+* Support for width, height, zoom, scrollwheel, draggable and catID attributes on the [sightings-map] shortcode.
+
 = 1.2 =
 * Crowd sourcing feature: let your visitors submit their own sightings through a contributor form
 * Fixed some minor bugs
@@ -108,6 +115,9 @@ Thanks!
 * Initial release. Basic functionality.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Important bug-fixes for contributor categories, and much more. See plugin readme.txt file for full changelog.
 
 = 1.2 =
 New crowd sourcing features, bug fixes and better form validation.

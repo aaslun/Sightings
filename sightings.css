@@ -43,6 +43,15 @@
     float: right;
     margin: 15px 15px 0 0;
 }
+#sightings_advanced {
+    float:left;
+    clear: both;
+    margin-bottom: 8px;
+}
+
+#sightings_advanced .advanced{
+    display:none;
+}
 
 /* Sightings settings page style
 */
@@ -145,4 +154,23 @@ p.info {
     background-position: 0 3px;
     padding-left: 25px;
     margin: 0;
+}
+
+/* Sightings big map
+*/
+
+.sightings_contributor_panel {
+    background: #ccc;
+    padding:2px;
+}
+
+.contributor_form input[type=text] {
+    width: 92%;
+}
+.contributor_form textarea {
+    width: 92%;
+    resize: none;
+}
+.contributor_form input[type=submit] {
+    float: right;
 }

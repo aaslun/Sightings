@@ -29,22 +29,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * Plugin constants
  */
 define ('SIGHTINGS_HANDLE','sightings');
-define ('SIGHTINGS_PLUGIN_DIR', plugin_dir_url(__FILE__));
+define ('SIGHTINGS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
+define ('SIGHTINGS_PLUGIN_DIR', WP_PLUGIN_DIR .'/'. dirname( plugin_basename( __FILE__ )));
+define ('SIGHTINGS_PLUGIN_THEME_DIR', WP_PLUGIN_DIR .'/'. dirname( plugin_basename( __FILE__ )) .'/theme-files');
+define ('SIGHTINGS_PLUGIN_ADMIN_DIR', WP_PLUGIN_DIR .'/'. dirname( plugin_basename( __FILE__ )) .'/admin');
 
 /*
  * Plugin textdomain
  */
-load_plugin_textdomain(SIGHTINGS_HANDLE, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+function sightings_init() {
+    load_plugin_textdomain(SIGHTINGS_HANDLE, false, dirname( plugin_basename( __FILE__ )) . '/languages/');
+}
+add_action('init','sightings_init');
 
 /*
  * Load Sightings libraries
  */
-require_once __DIR__ . '/class-sightings.php';
+require_once SIGHTINGS_PLUGIN_DIR . '/class-sightings.php';
 
 /*
  * Filters and actions
  */
-require_once __DIR__ . '/filters.php';
+require_once SIGHTINGS_PLUGIN_THEME_DIR . '/filters.php';
 
 /**
  * Function for creating the sightings meta box in admin
@@ -55,7 +61,7 @@ function sightings_meta_box() {
     wp_nonce_field(plugin_basename(__FILE__), SIGHTINGS_HANDLE);
 
     // include meta box template file
-    require_once __DIR__ . '/sightings-meta-box.php';
+    require_once SIGHTINGS_PLUGIN_ADMIN_DIR . '/sightings-meta-box.php';
 }
 
 /**
@@ -64,5 +70,5 @@ function sightings_meta_box() {
  */
 function sightings_menu_page() {
     // include sightings settings template file
-    require_once __DIR__ . '/sightings-settings.php';
+    require_once SIGHTINGS_PLUGIN_ADMIN_DIR . '/sightings-settings.php';
 }

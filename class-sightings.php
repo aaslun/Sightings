@@ -11,12 +11,36 @@ class Sightings_Manager {
      * @return array
      */
     public function getAllSightings() {
-        /**
-         * @var wpdb $wpdb
-         */
-        global $wpdb;
-        $sightings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_value, post_id FROM $wpdb->postmeta WHERE meta_key = '".SIGHTINGS_HANDLE."'" ), ARRAY_A );
-        return $sightings ? $sightings : array();
+
+        $posts_array = $posts_array = get_posts(array(
+                        'post_status'   =>  'publish',
+                        'post_type' =>  'post',
+                        'meta_key'  =>  SIGHTINGS_HANDLE
+                ));
+
+        return $posts_array ? $posts_array : array();
+    }
+
+    /**
+     * Returns all Sightings for a specific category
+     * @param $cat Either a category ID or a category slug
+     * @return array
+     */
+    public function getSightingsByCategory($cat) {
+        $category = is_numeric($cat) ? get_the_category_by_ID($cat) : get_category_by_slug($cat);
+        // Get all posts with this category
+        $posts_array = get_posts(array(
+                'category'  =>  $category->term_id,
+                'post_status'   =>  'publish',
+                'post_type' =>  'post',
+                'meta_key'  =>  SIGHTINGS_HANDLE
+        ));
+
+        return $posts_array ? $posts_array : array();
+    }
+
+    public function isGravityFormsActive() {
+        return is_plugin_active('gravityforms/gravityforms.php');
     }
 
     /**
@@ -70,13 +94,12 @@ class Sightings_Manager {
 
         if($new_post_id  != 0) {
             $sightings_post_array['display'] = true;
-            if(self::saveSightingPostMeta($new_post_id, $sightings_post_array))
+            if(self::saveSightingPostMeta($new_post_id, $sightings_post_array)) {
                 if(isset($default_settings['notify_user'])) {
                     self::notifyAuthorAboutNewContribution($default_settings['author'], $sightings_post_array, $new_post_id);
                 }
-                else{
-                    throw new Exception('Could not save Sightings post meta for post ID: '.$new_post_id);
-                }
+            }
+            else throw new Exception('Could not save Sightings post meta for post ID: '.$new_post_id);
         }
         else {
             throw new Exception('Could not create new Sighting');
@@ -109,6 +132,14 @@ class Sightings_Manager {
         return get_option(SIGHTINGS_HANDLE);
     }
 
+    /**
+     * Sends an e-mail to the current selected contributor author about new contribution
+     * Requires PHP mail to be activated
+     * @param $author_id
+     * @param $sightings_post_array
+     * @param $new_post_id
+     * @throws Exception
+     */
     public function notifyAuthorAboutNewContribution($author_id, $sightings_post_array, $new_post_id) {
 
         $user = get_userdata($author_id);
