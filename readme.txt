@@ -63,7 +63,7 @@ Click on the "[+] Contribute with a location" link at the bottom of the map. A m
 Every submission is imported into your blog as a drafted post, awaiting your approval. Just change the post status to "published" if you want it to appear publicly on your blog along with your other sightings.
 It is highty recommended that you configure the Sightings settings in admin first. Here you can also choose to recieve e-mails when someone submits a new sighting through the form.
 
-= How do i display all markers on a larger map? =
+= How do I display all markers on a larger map? =
 
 First, make sure that you have created some posts, positioned and saved the geolocations on the maps.
 Otherwise the map will be empty.
@@ -71,6 +71,12 @@ Create a new post/page.
 In the text meta-box, type in the text: [sightings-map]
 Save/publish the post/page.
 View the post/page.
+
+= Can I filter out markers by category on the larger map? =
+
+Yes, just enter the [sightings-map] attribute cat_slug or cat_id for the category you want to display on the map.
+This will only fetch and display sightings markers for the provided category on the [sightings-map].
+For example: [sightings-map cat_id="3"] ,will display only sightings that have the category with id 3.
 
 = I really like this plugin! How can i contribute? =
 
@@ -99,7 +105,7 @@ Thanks!
 * Improved plugin file structure offers better overview.
 * Replaced lambda functions in filters.php for better PHP compatibility.
 * Better Swedish translations.
-* Support for allow_contributors, width, height, zoom, scrollwheel, draggable, cat_slug and cat_id attributes on the [sightings-map] shortcode.
+* Support for allow_contributors, allow_contributor_image, width, height, zoom, scrollwheel, draggable, cat_slug and cat_id attributes on the [sightings-map] shortcode.
 
 = 1.2 =
 * Crowd sourcing feature: let your visitors submit their own sightings through a contributor form

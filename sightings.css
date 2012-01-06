@@ -164,13 +164,29 @@ p.info {
     padding:2px;
 }
 
+.contributor_form p {
+    margin: 0 !important;
+}
+.contributor_form input {
+    margin-bottom: 5px;
+}
 .contributor_form input[type=text] {
     width: 92%;
 }
 .contributor_form textarea {
     width: 92%;
     resize: none;
+    vertical-align: text-top;
 }
 .contributor_form input[type=submit] {
     float: right;
+    padding:20px;
+}
+
+.sight_info p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.sight_info img.attachment-post-thumbnail {
+    max-width: 300px;
 }

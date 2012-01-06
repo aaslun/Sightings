@@ -22,6 +22,7 @@ function sightings_map_function($parameters) {
     $draggable = '';
     $scrollwheel = '';
     $allow_contributors = '';
+    $allow_contributor_image = '';
 
     extract(
         shortcode_atts(
@@ -31,7 +32,10 @@ function sightings_map_function($parameters) {
                 'zoom'  =>  '6',
                 'draggable' => 'true',
                 'scrollwheel' => 'false',
-                'allow_contributors' => 'true'
+                'allow_contributors' => 'true',
+                'allow_contributor_image' => 'true',
+                'cat_id' => '',
+                'cat_slug' => ''
             ), $parameters ) );
 
     $manager = new Sightings_Manager();
@@ -59,16 +63,20 @@ function sightings_map_function($parameters) {
         $sightings_post_array['zoom'] = $_POST['map_zoom'];
     }
 
+    if(isset($_FILES['sightings_image_file']) && $_FILES['sightings_image_file'] != '') {
+        $sightings_post_array['image_file'] = $_FILES['sightings_image_file'];
+    }
+
     if(isset($_POST['sightings_category']) && $_POST['sightings_category'] != '') {
         $sightings_post_array['category'] = $_POST['sightings_category'];
     }
 
-    if(isset($_POST['contributor_name']) && $_POST['contributor_name'] != '') {
-        $sightings_post_array['name'] = $_POST['contributor_name'];
+    if(isset($_POST['sightings_contributor_name']) && $_POST['sightings_contributor_name'] != '') {
+        $sightings_post_array['name'] = $_POST['sightings_contributor_name'];
     }
 
-    if(isset($_POST['contributor_email']) && $_POST['contributor_email'] != '') {
-        $sightings_post_array['email'] = $_POST['contributor_email'];
+    if(isset($_POST['sightings_contributor_email']) && $_POST['sightings_contributor_email'] != '') {
+        $sightings_post_array['email'] = $_POST['sightings_contributor_email'];
     }
 
     if(count($_POST) > 0) {
@@ -153,14 +161,18 @@ function sightings_map_function($parameters) {
                     $sight_meta = get_post_meta($sight->ID, SIGHTINGS_HANDLE, ARRAY_A);
 
                     if($sight != '' && $sight->post_status == 'publish') {
-                        $sight_info = '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
+                        $sight_info = '<div class="sight_info">';
+                        has_post_thumbnail($sight->ID) ? $sight_info .= '<p>'.get_the_post_thumbnail($sight->ID).'</p>' : '';
+                        $sight_info .= '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
+                        $sight_info .= '<p class="excerpt">'.($sight->post_excerpt != '' ? $manager->shorten($sight->post_excerpt,100) : $manager->shorten($sight->post_content,100)).'</p>';
                         $sight_categories = wp_get_post_categories($sight->ID);
-                        $sight_info .= '<p>'.get_cat_name($sight_categories[0]).'</p>';
+                        $sight_info .= '<p><strong>'.get_cat_name($sight_categories[0]).'</strong></p>'; // Will only fetch the first category
                         if(isset($sight_meta['gf_id']))
                         { // START Gravity Forms optional features
                             $num_submits = RGFormsModel::get_form_counts($sight_meta['gf_id']);
                             $sight_info .= '<p>'.__('Responses received',SIGHTINGS_HANDLE).': '.$num_submits['total'].'</p>';
                         } // END Gravity Forms optional features
+                        $sight_info .= '</div>';
                         ?>
                         var latlng = new google.maps.LatLng(<?php echo $sight_meta['lat'] ?>,<?php echo $sight_meta['lng'] ?>);
                         var infoWindow = new google.maps.InfoWindow ();
@@ -192,9 +204,14 @@ function sightings_map_function($parameters) {
 
                 var infoWindow = new google.maps.InfoWindow ();
                 <?php // Setup the contributor form
-                $sight_form = '<form action="#" method="post"><div class="contributor_form">';
+                $sight_form = '<form action="#" method="post" enctype="multipart/form-data"><div class="contributor_form">';
                 $sight_form .='<div><label for="sightings_title">'.__('Title',SIGHTINGS_HANDLE).':</label><input id="sightings_title" type="text" name="sightings_title"/></div>';
                 $sight_form .='<div><label for="sightings_body">'.__('Description',SIGHTINGS_HANDLE).':</label><textarea id="sightings_body" cols rows name="sightings_body"></textarea></div>';
+                if($allow_contributor_image != 'false')
+                    $sight_form .='<div><label for="sightings_image">'.__('Attach an image (optional)',SIGHTINGS_HANDLE).':<input type="file" name="sightings_image_file" id="sightings_image_file" value="'.__('Browse',SIGHTINGS_HANDLE).'" /></label><p id="browsed_image"><em>'.__('No image file selected',SIGHTINGS_HANDLE).'</em></p></div>';
+                $sight_form .='<div><label for="sightings_contributor_name">'.__('Your name',SIGHTINGS_HANDLE).':</label><input id="sightings_contributor_name" type="text" name="sightings_contributor_name"/></div>';
+                $sight_form .='<div><label for="sightings_contributor_email">'.__('Your e-mail',SIGHTINGS_HANDLE).':</label><input id="sightings_contributor_email" type="text" name="sightings_contributor_email"/></div>';
+
                 // Hidden fields containing marker lat, lng and map zoom level
                 $sight_form .='<input type="hidden" id="marker_lat_hidden" name="marker_lat" >';
                 $sight_form .='<input type="hidden" id="marker_lng_hidden" name="marker_lng" >';
@@ -237,12 +254,16 @@ function sightings_map_function($parameters) {
                 google.maps.event.addListener(marker, 'click', function(){
                     infoWindow.setContent('<?php echo $sight_form ?>');
                     infoWindow.open(map, this);
-                    var updateCoords = function () {
+                    var updateSightForm = function () {
                         jQuery('#map_zoom_hidden').val(map.getZoom());
                         jQuery('#marker_lat_hidden').val(Math.round(marker.getPosition().lat()*10000)/10000);
                         jQuery('#marker_lng_hidden').val(Math.round(marker.getPosition().lng()*10000)/10000);
+
+                        jQuery('#sightings_image_file').change(function() {
+                            jQuery('#browsed_image').html(jQuery(this).val().replace('C:\\fakepath\\', ''));
+                        });
                     };
-                    setTimeout(updateCoords,500); // Since sight_form does not always exist before this
+                    setTimeout(updateSightForm,500); // Since sight_form does not always exist before this
                 });
 
                 // Close infoWindow on dragstart

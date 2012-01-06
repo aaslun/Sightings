@@ -8,7 +8,7 @@
 function sightings_init_style() {
         wp_enqueue_script('jquery');
         wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
-        wp_enqueue_style(SIGHTINGS_HANDLE.'_style', SIGHTINGS_PLUGIN_DIR_URL.'sightings.css');
+        wp_enqueue_style(SIGHTINGS_HANDLE.'_style', SIGHTINGS_PLUGIN_DIR_URL.'sightings.css?'.rand(0,9999));
 
         // Register shortcodes
         include __DIR__ . '/shortcode-sightings-map.php';

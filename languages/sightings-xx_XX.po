@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sightings v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-05 15:30+0100\n"
-"PO-Revision-Date: 2012-01-05 15:30+0100\n"
+"POT-Creation-Date: 2012-01-06 18:57+0100\n"
+"PO-Revision-Date: 2012-01-06 18:57+0100\n"
 "Last-Translator: Andreas Lundgren <andreas.lundgren@norran.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,249 +11,241 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings\n"
+"X-Poedit-SearchPath-0: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings\n"
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/class-sightings.php:154
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:241
 msgid "New Sightings contribution from "
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/class-sightings.php:167
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:241
+msgid "Anonymous"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:255
 msgid "Contributor e-mail: "
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/class-sightings.php:168
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/class-sightings.php:256
 msgid "Click here to see the post:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-ajax.php:32
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-ajax.php:32
 msgid "Marker location saved!"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-ajax.php:35
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-ajax.php:35
 msgid "Post ID not found! Marker location not saved."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:37
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:37
 msgid "Current view center"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:38
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:45
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:48
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:98
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:38
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:45
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:48
 msgid "Latitude:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:40
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:47
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:50
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:101
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:40
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:47
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:50
 msgid "Longitude:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:44
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:97
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:44
 msgid "Marker"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:49
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:104
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:49
 msgid "Zoom:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:53
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:53
 msgid "Options"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:54
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:54
 msgid "Display map on post"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:58
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:58
 msgid "Use"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:63
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:63
 msgid "Advanced settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:68
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:68
 msgid "Connect Gravity Form"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:70
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:70
 msgid "Select form..."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-meta-box.php:134
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-meta-box.php:133
 msgid "Please reposition the marker first"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:24
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:24
 msgid "Settings saved successfully"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:32
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:32
 msgid "Settings are invalid! Only numeric values and dots are allowed. (no commas)"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:40
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:40
 msgid "Sightings settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:44
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/filters.php:21
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/filters.php:22
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:122
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:44
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/filters.php:20
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/filters.php:21
 msgid "Map"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:45
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:45
 msgid "Default map settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:46
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:46
 msgid "The default position and zoom level for the maps on new posts."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:52
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:52
 msgid "Zoom level:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:56
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:56
 msgid "Default display settings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:57
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:57
 msgid "Toggles whether the map should be displayed or not by default on new posts."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:59
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:59
 msgid "Display sightings maps on posts:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:64
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:64
 msgid "Contributors"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:65
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:65
 msgid "Author"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:66
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:66
 msgid "This user that will be set as author on contributor posts."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:70
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:70
 msgid "Post as user:"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:84
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:84
 msgid "Send notification e-mail to user when someone submits a new contribution"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:87
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:119
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:87
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:119
 msgid "Contributor categories"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:88
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:88
 msgid "Select the categories you want to be available for contributors."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:93
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:93
 msgid "Available categories"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:111
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:111
 msgid "Add"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:125
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:192
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:125
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:192
 msgid "Remove"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:134
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:134
 msgid "Gravity Forms"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:135
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:135
 msgid "You seem to have Gravity Forms installed. You have the option of taking advantage of extra functionality such as connecting forms to your sightings."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:137
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:137
 msgid "Enable Gravity Forms features."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/admin/sightings-settings.php:142
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/admin/sightings-settings.php:142
 msgid "Save Changes"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/filters.php:28
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/filters.php:27
 msgid "Sightings"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:53
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:84
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:89
 msgid "The contribution was not submitted! You need to fill out the form completely."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:60
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:91
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:96
 msgid "Thanks for your contribution! It has now been submitted for review."
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:76
-msgid "Title:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:82
-msgid "Category:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:95
-msgid "Location description:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:109
-msgid "Your name:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:114
-msgid "Your e-mail:"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:119
-msgid "Drag-and-drop the marker to your desired position on the map"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-contribute-form.php:125
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:205
-msgid "Submit"
-msgstr ""
-
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:112
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:117
 msgid "Contribute with a location"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:163
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:173
 msgid "Responses received"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:189
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:208
 msgid "Title"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:190
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:209
 msgid "Description"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:198
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:211
+msgid "Attach an image (optional)"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:211
+msgid "Browse"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:211
+msgid "No image file selected"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:212
+msgid "Your name"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:213
+msgid "Your e-mail"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:222
 msgid "Category"
 msgstr ""
 
-#: /Applications/MAMP/htdocs/incopolo/wp-content/plugins/norran-sightings/theme-files/shortcode-sightings-map.php:223
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:229
+msgid "Submit"
+msgstr ""
+
+#: /Applications/MAMP/htdocs/prnrml/wp-content/plugins/sightings/theme-files/shortcode-sightings-map.php:247
 msgid "<p>Drag me and klick me!</p>"
 msgstr ""
 
