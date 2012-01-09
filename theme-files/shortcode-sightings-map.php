@@ -64,7 +64,7 @@ function sightings_map_function($parameters) {
     }
 
     if(isset($_FILES['sightings_image_file']) && $_FILES['sightings_image_file'] != '') {
-        $sightings_post_array['image_file'] = $_FILES['sightings_image_file'];
+        $sightings_post_array['image_file'] = 'sightings_image_file';
     }
 
     if(isset($_POST['sightings_category']) && $_POST['sightings_category'] != '') {
@@ -162,7 +162,7 @@ function sightings_map_function($parameters) {
 
                     if($sight != '' && $sight->post_status == 'publish') {
                         $sight_info = '<div class="sight_info">';
-                        has_post_thumbnail($sight->ID) ? $sight_info .= '<p>'.get_the_post_thumbnail($sight->ID).'</p>' : '';
+                        has_post_thumbnail($sight->ID) ? $sight_info .= '<p>'.get_the_post_thumbnail($sight->ID,'thumbnail').'</p>' : '';
                         $sight_info .= '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
                         $sight_info .= '<p class="excerpt">'.($sight->post_excerpt != '' ? $manager->shorten($sight->post_excerpt,100) : $manager->shorten($sight->post_content,100)).'</p>';
                         $sight_categories = wp_get_post_categories($sight->ID);

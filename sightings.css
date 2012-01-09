@@ -160,8 +160,12 @@ p.info {
 */
 
 .sightings_contributor_panel {
-    background: #ccc;
+    background: #666;
     padding:2px;
+    padding: 4px 12px;
+}
+.sightings_contributor_panel a, a:visited {
+    color: #ccc;
 }
 
 .contributor_form p {
@@ -180,7 +184,7 @@ p.info {
 }
 .contributor_form input[type=submit] {
     float: right;
-    padding:20px;
+    margin-right: 20px;
 }
 
 .sight_info p {

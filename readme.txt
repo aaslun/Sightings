@@ -8,13 +8,14 @@ Stable tag: trunk
 License: GPLv2 or later
 Donate link: http://webdez.se/donate/
 
-Sightings easily lets you, or your readers, geo-tag any post or page in WordPress and them on maps in your blog.
+Sightings lets you or your readers geo-tag any post or page in your WordPress site to display your blog posts on a Google map.
 
 == Description ==
 
-The purpose of Sightings is to connect any post or page with a map of a specific location.
-Sightings is an easy to use plug-in that utilizes the Google Maps v3 JavaScript API to let you geo-tag any post or page in your WordPress installation.
-Since version 1.2 you can even let your visitors submit their own geotagged places through a contribution form on the [sightings-map]!
+Why navigate your blog by search or menus? Display your blog on Google maps instead!
+The purpose of Sightings is to allow you to link any of your post or page with a specific geographic location.
+Sightings is an easy to use plug-in that utilizes the Google Maps v3 JavaScript API to let you geo-tag any post or page in your WordPress site.
+Since version 1.3 you can even let your visitors submit their own geotagged places by dropping their own markers on the [sightings-map]!
 Display all your recorded sightings on a larger map by using the shortcode: [sightings-map] on any post or page.
 
 Example of situations where you'd find Sightings useful, if:
@@ -34,9 +35,9 @@ Features:
 
 * Easy to get started, easy to use
 * Geo-tag any post or page
-* Display the geo-tag on a Google map inside the post
+* Display the geo-tag on a Google map that can be viewed on the post
 * Display all recorded geo-tags collectively on a larger map by typing the shortcode: [sightings-map] into any post or page
-* Multiple language support
+* Multiple language support (English, Swedish)
 
 == Installation ==
 
@@ -97,6 +98,10 @@ Thanks!
 
 == Changelog ==
 
+= 1.3.1 =
+* Better back-end handling of image uploads for contributor sightings.
+* CSS fixes
+
 = 1.3 =
 * Sightings post maps are now displayed at the top of the post instead of at the bottom.
 * Removed the old contribution form and shortcode. You can now leave a contribution by dropping a marker directly on the [sightings-map].
@@ -125,6 +130,9 @@ Thanks!
 * Initial release. Basic functionality.
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+Minor CSS tweaks and better back-end handling of media uploads.
 
 = 1.3 =
 Contributor shortcode removed and merged into Sightings map shortcode. Important bug-fixes for contributor categories, and much more. See plugin readme.txt file for full changelog.

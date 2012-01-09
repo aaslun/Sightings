@@ -5,7 +5,7 @@
  */
 
 // Enqueue scripts and style
-function sightings_init_style() {
+function sightings_enqueue() {
         wp_enqueue_script('jquery');
         wp_enqueue_script('google_maps_javascript','http://maps.googleapis.com/maps/api/js?sensor=true');
         wp_enqueue_style(SIGHTINGS_HANDLE.'_style', SIGHTINGS_PLUGIN_DIR_URL.'sightings.css?'.rand(0,9999));
@@ -13,7 +13,7 @@ function sightings_init_style() {
         // Register shortcodes
         include __DIR__ . '/shortcode-sightings-map.php';
     };
-add_action('init', 'sightings_init_style');
+add_action('init', 'sightings_enqueue');
 
 // Post & page admin meta boxes
 function sightings_add_meta_boxes() {

@@ -103,7 +103,13 @@ class Sightings_Manager {
 
                 $file = $sightings_post_array['image_file'];
 
-                $new_attachment_id = self::handleUpload($file, $new_post_id);
+                if(!function_exists('media_handle_upload')){
+                    include_once('wp-admin/includes/file.php');
+                    include_once('wp-admin/includes/media.php');
+                    include_once('wp-admin/includes/image.php');
+                }
+
+                $new_attachment_id = media_handle_upload($file, $new_post_id);
 
                 if(!$new_attachment_id) {
                     throw new Exception('Could not handle upload for Sighting id:'.$new_post_id);
@@ -187,36 +193,6 @@ class Sightings_Manager {
             }
         }
         return $str;
-    }
-
-    /**
-     * Uploads a file as an attachment to a specific post ID
-     * @param $file
-     * @param $post_id
-     * @return int attachment ID
-     * @throws Exception
-     */
-    public function handleUpload($file, $post_id) {
-        include_once( ABSPATH . '/wp-admin/includes/file.php');
-
-        $upload = wp_handle_upload($file, array('test_form' => FALSE));
-        if(!isset($upload['error']) && isset($upload['file'])) {
-            $filetype   = wp_check_filetype(basename($upload['file']), null);
-            $title      = $file['name'];
-            $ext        = strrchr($title, '.');
-            $title      = ($ext !== false) ? substr($title, 0, -strlen($ext)) : $title;
-            $attachment = array(
-                'post_mime_type'    => $filetype['type'],
-                'post_title'        => addslashes($title),
-                'post_content'      => '',
-                'post_status'       => 'inherit',
-                'post_parent'       => $post_id
-            );
-            return wp_insert_attachment($attachment, $upload['file'], $post_id);
-        }
-        else {
-            throw new Exception('Could not handle upload');
-        }
     }
 
     /**
