@@ -11,8 +11,8 @@
 }
 
 .latlng_container, .post_options_container {
-    width: 25%;
-    height: 60px;
+    width: 20%;
+    height: 74px;
     float: left;
     border: 1px dashed gray;
     margin: 0 15px 8px 0;
@@ -34,14 +34,15 @@
 }
 
 #sightings-status .message {
-    float: left;
-    padding-top: 25px;
-    font-size: 16pt;
+   float: left;
+   padding-top: 17px;
+   font-weight: bold;
 }
 
 #sightings_loader {
-    float: right;
-    margin: 15px 15px 0 0;
+   position: absolute;
+   top: 37px;
+   right: 7px;
 }
 #sightings_advanced {
     float:left;
@@ -164,12 +165,19 @@ p.info {
     padding:2px;
     padding: 4px 12px;
 }
-.sightings_contributor_panel a, a:visited {
+.sightings_contributor_panel a,
+.sightings_contributor_panel a:visited {
     color: #ccc;
 }
 
+.contributor_form {
+    overflow: auto;
+}
 .contributor_form p {
     margin: 0 !important;
+}
+.contributor_form label {
+    display: block;
 }
 .contributor_form input {
     margin-bottom: 5px;

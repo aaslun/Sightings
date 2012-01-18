@@ -4,6 +4,10 @@ $manager = new Sightings_Manager();
 
 if(count($_POST) > 0)
 {
+    if(isset($_POST['delete_all_sightings'])) {
+        $manager->deleteAllSightings();
+        echo '<div id="status_success">'. __('All sightings removed!', SIGHTINGS_HANDLE) .'</div>';
+    }
     $settings['lat'] = $_POST['map_lat'];
     $settings['lng'] = $_POST['map_lng'];
     $settings['zoom'] = $_POST['map_zoom'];
@@ -14,8 +18,6 @@ if(count($_POST) > 0)
         $settings['author'] = $_POST['author'];
     if(isset($_POST['notify_user']))
         $settings['notify_user'] = $_POST['notify_user'];
-    if(isset($_POST['gf_connect']))
-            $settings['gf_connect'] = $_POST['gf_connect'];
 
     if(count($settings) > 0) {
         $manager->saveSightingsSettings($settings);
@@ -40,7 +42,7 @@ else {
     <h2 style="padding-top: 15px"><?php _e('Sightings settings',SIGHTINGS_HANDLE) ?></h2>
     <br />
     <hr />
-    <form name="sightins_settings" action="" onsubmit="return validateSettings();" method="post">
+    <form name="sightings_settings" action="" onsubmit="return validateSettings();" method="post">
         <h3><?php _e('Map',SIGHTINGS_HANDLE) ?></h3>
         <h4><?php _e('Default map settings',SIGHTINGS_HANDLE) ?>:</h4>
         <span class="howto"><?php _e('The default position and zoom level for the maps on new posts.',SIGHTINGS_HANDLE) ?></span>
@@ -129,17 +131,10 @@ else {
             </table>
         </div>
 
-        <?php if($manager->isGravityFormsActive()) { ?>
-            <hr />
-            <h3><?php _e('Gravity Forms',SIGHTINGS_HANDLE); ?>:</h3>
-            <span class="howto"><?php _e('You seem to have Gravity Forms installed. You have the option of taking advantage of extra functionality such as connecting forms to your sightings.',SIGHTINGS_HANDLE) ?></span>
-            <input type="checkbox" name="gf_connect" id="gf_connect" <?php echo isset($settings['gf_connect']) ? 'checked="checked"' : '' ?>/>
-            <label for="gf_connect"><?php _e('Enable Gravity Forms features.',SIGHTINGS_HANDLE) ?></label>
-        <?php } ?>
-
         <hr/>
 
         <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>">
+        <input type="button" onclick="deleteAllSightings();" style="margin-left:20px; background: #fbb;" class="button-secondary" value="<?php _e('Delete all sightings') ?>">
 
     </form>
 </div>
@@ -190,6 +185,15 @@ else {
         });
         if(! is_duplicate) {
             jQuery('#contributor_categories').append('<tr><td>'+jQObj.text()+'</td><td><a href="#" onclick="removeCategory(jQuery(this)); return false;"> [- <?php _e('Remove', SIGHTINGS_HANDLE) ?>]</a><input type="hidden" name="contributor_categories[]" value="'+jQObj.val()+'" /></td></tr>')
+        }
+    }
+
+    function deleteAllSightings() {
+        var confirm_delete =  confirm('<?php _e('Are you sure? This will delete all recorded sightings!') ?>');
+        if(confirm_delete) {
+            var $hidden_input = jQuery('<input type="hidden" name="delete_all_sightings" value="1" />');
+            console.log(jQuery('form[name="sightings_settings"]'));
+            jQuery('form[name="sightings_settings"]').append($hidden_input).submit();
         }
     }
 

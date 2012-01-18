@@ -72,3 +72,30 @@ function sightings_menu_page() {
     // include sightings settings template file
     require_once SIGHTINGS_PLUGIN_ADMIN_DIR . '/sightings-settings.php';
 }
+
+/**
+ * Set default setting values on activation
+ */
+function sightings_activation(){
+    $default_settings['lat'] = 62;
+    $default_settings['lng'] = 16;
+    $default_settings['zoom'] = 4;
+    $default_settings['display'] = 1;
+    update_option(SIGHTINGS_HANDLE,$default_settings);
+}
+/**
+ * Clear default setting values on deactivation
+ */
+function sightings_deactivation(){
+    delete_option(SIGHTINGS_HANDLE);
+}
+register_activation_hook(__FILE__,'sightings_activation');
+register_deactivation_hook(__FILE__,'sightings_deactivation');
+
+
+// Add settings link on plugin page
+add_filter('plugin_action_links_'.plugin_basename(__FILE__), function ($links) {
+  $settings_link = '<a href="options-general.php?page=sightings-settings.php">Settings</a>';
+  array_unshift($links, $settings_link);
+  return $links;
+} );

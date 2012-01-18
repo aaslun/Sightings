@@ -13,10 +13,10 @@ class Sightings_Manager {
     public function getAllSightings() {
 
         $posts_array = $posts_array = get_posts(array(
-                        'post_status'   =>  'publish',
-                        'post_type' =>  'post',
-                        'meta_key'  =>  SIGHTINGS_HANDLE
-                ));
+            'post_status'   =>  'publish',
+            'post_type' =>  'post',
+            'meta_key'  =>  SIGHTINGS_HANDLE
+        ));
 
         return $posts_array ? $posts_array : array();
     }
@@ -34,17 +34,13 @@ class Sightings_Manager {
 
         // Get all posts with this category
         $posts_array = get_posts(array(
-                'category'  =>  $category->term_id,
-                'post_status'   =>  'publish',
-                'post_type' =>  'post',
-                'meta_key'  =>  SIGHTINGS_HANDLE
+            'category'  =>  $category->term_id,
+            'post_status'   =>  'publish',
+            'post_type' =>  'post',
+            'meta_key'  =>  SIGHTINGS_HANDLE
         ));
 
         return $posts_array ? $posts_array : array();
-    }
-
-    public function isGravityFormsActive() {
-        return is_plugin_active('gravityforms/gravityforms.php');
     }
 
     /**
@@ -56,9 +52,35 @@ class Sightings_Manager {
         ?>
     <div id="map_canvas" style="width:100%; height:200px;"></div>
     <script type="text/javascript">
+        // Load markers
+        var loadedMarkers = [];
+            <?php
+            if(isset($sighting['markers'])) {
+                $i = 0;
+                foreach($sighting['markers'] as $marker_latlng){
+                    echo 'loadedMarkers['.$i.'] = ['.$marker_latlng[0].','.$marker_latlng[1].'];';
+                    $i++;
+                }
+            }
+            ?>
+
         // Load the map
         jQuery(window).load(function(){
-            var latlng = new google.maps.LatLng(<?php echo isset($sighting['lat']) ? $sighting['lat'] : '' ?>, <?php echo isset($sighting['lng']) ? $sighting['lng'] : '' ?>);
+            var latlng;
+            var lat = 0;
+            var lng = 0;
+            // Calculate map center
+            for(var i=0; i<loadedMarkers.length; i++)
+            {
+                lat += loadedMarkers[i][0];
+                lng += loadedMarkers[i][1];
+            }
+            lat = (lat / loadedMarkers.length);
+            lng = (lng / loadedMarkers.length);
+
+
+            latlng = new google.maps.LatLng(lat, lng);
+
             var myOptions = {
                 zoom: <?php echo isset($sighting['zoom']) ? $sighting['zoom'] : 5 ?>,
                 center: latlng,
@@ -67,17 +89,27 @@ class Sightings_Manager {
                 scrollwheel: false,
                 streetViewControl: false,
                 panControl: false,
+                disableDoubleClickZoom: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(document.getElementById('map_canvas'),
                     myOptions);
 
-            var marker = new google.maps.Marker({
-                map:map,
-                draggable:false,
-                animation: google.maps.Animation.DROP,
-                position:latlng
-            });
+            var addMarker = function(map, latlng) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    draggable: false,
+                    position: latlng
+                });
+                return marker;
+            };
+
+            if(loadedMarkers.length > 0) {
+                for(i in loadedMarkers) {
+                    latlng = new google.maps.LatLng(loadedMarkers[i][0],loadedMarkers[i][1]);
+                    var marker = addMarker(map,latlng);
+                }
+            }
         });
     </script>
     <?php
@@ -140,6 +172,23 @@ class Sightings_Manager {
      */
     public function saveSightingPostMeta($post_id, $sighting) {
         return update_post_meta($post_id,SIGHTINGS_HANDLE,$sighting);
+    }
+
+    /**
+     * Deletes Sighting for a post
+     * @param $post_id
+     * @return bool
+     */
+    public function deleteSightingPostMeta($post_id) {
+        return delete_post_meta($post_id,SIGHTINGS_HANDLE);
+    }
+
+    /**
+     * Deletes all sightings post-meta for all posts
+     */
+    public function deleteAllSightings() {
+        if(!delete_post_meta_by_key(SIGHTINGS_HANDLE))
+           trigger_error('Could not delete all '.SIGHTINGS_HANDLE.' post meta!');
     }
 
     /**

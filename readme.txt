@@ -1,9 +1,9 @@
 === Sightings ===
 Author: Andreas Lundgren (webdez)
-Contributors: webdez
+Contributors: webdez, Norran
 Tags: geotagging, geolocation, geolocate, geotag, place, location, gps, placemark, sightings, map, crowd sourcing, crowdsourcing, maps, google maps
 Requires at least: 3.0
-Tested up to: 3.2.1
+Tested up to: 3.3.1
 Stable tag: trunk
 License: GPLv2 or later
 Donate link: http://webdez.se/donate/
@@ -98,6 +98,14 @@ Thanks!
 
 == Changelog ==
 
+= 1.3.2 =
+* Removed needless Gravity Forms feature (feature just wasn't useful enough).
+* Fixed CSS-bugs.
+* Support for multiple markers on one post.
+* Button to "Delete all sightings", will delete all sightings post-meta (map positions) from the database.
+* IMPORTANT! You must delete all your previous sightings after upgrading to v 1.3.2. Multiple marker feature is not backwards compatible with sightings created before v 1.3.2.
+* No marker added initially on new posts. Makes sense, first marker should be added by user.
+
 = 1.3.1 =
 * Better back-end handling of image uploads for contributor sightings.
 * CSS fixes
@@ -130,6 +138,9 @@ Thanks!
 * Initial release. Basic functionality.
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+Support for multiple markers on one post. IMPORTANT! You must delete all your previous sightings after upgrading to v 1.3.2. Multiple marker feature is not backwards compatible with sightings created before v 1.3.2.
 
 = 1.3.1 =
 Minor CSS tweaks and better back-end handling of media uploads.

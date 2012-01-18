@@ -29,7 +29,7 @@ function sightings_map_function($parameters) {
             array( // Default attribute values for the sightings-map
                 'width' =>  '100%',
                 'height'=>  '400px',
-                'zoom'  =>  '6',
+                'zoom'  =>  '4',
                 'draggable' => 'true',
                 'scrollwheel' => 'false',
                 'allow_contributors' => 'true',
@@ -110,86 +110,96 @@ function sightings_map_function($parameters) {
 
     // Map container
     ?>
-    <div id="sightings_map" style="width:<?php echo $width ?>; height:<?php echo $height ?>;">
-    </div>
+<div id="sightings_map" style="width:<?php echo $width ?>; height:<?php echo $height ?>;">
+</div>
     <?php if($allow_contributors) : ?>
         <div class="sightings_contributor_panel">
             <a href="#">[+] <?php _e('Contribute with a location',SIGHTINGS_HANDLE) ?></a>
         </div>
     <?php endif; ?>
 
-    <script type="text/javascript">
-        jQuery(document).ready(function(){
-            <?php
-            // Calculate markers center
-            $lat = '';
-            $lng = '';
-            if(count($sightings) > 0) {
-                foreach($sightings as $sight)
-                {
-                    $sight = get_post_meta($sight->ID, SIGHTINGS_HANDLE, ARRAY_A);
-                    $lat += $sight['lat'];
-                    $lng += $sight['lng'];
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        <?php
+        // Calculate map center based on marker positions
+        $lat = '';
+        $lng = '';
+        $markers_total = 0;
+        $markers = array();
+        if(count($sightings) > 0) {
+            foreach($sightings as $sight)
+            {
+                $sight = get_post_meta($sight->ID, SIGHTINGS_HANDLE, ARRAY_A);
+                if(isset($sight['markers'])) {
+                    $markers = $sight['markers'];
+                    $markers_total += count($markers);
+                    foreach($markers as $marker_latlng){
+
+                        $lat += $marker_latlng[0];
+                        $lng += $marker_latlng[1];
+                    }
                 }
-                $lat = ($lat / count($sightings));
-                $lng = ($lng / count($sightings));
             }
-            else {
-                $lat = 65;
-                $lng = 13;
-            }
-            ?>
-            var map_latlng = new google.maps.LatLng(<?php echo $lat ?>,<?php echo $lng ?>);
-            var myOptions = {
-                zoom: <?php echo $zoom ?>,
-                center: map_latlng,
-                draggable: <?php echo $draggable ?>,
-                scrollwheel: <?php echo $scrollwheel ?>,
-                zoomControlOptions: {
-                    style: google.maps.ZoomControlStyle.LARGE
-                  },
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById('sightings_map'),
-                    myOptions);
-            <?php
-            // Render sighting markers on map
-            if(count($sightings) > 0) {
-                foreach($sightings as $sight)
-                {
+            $lat = ($lat / $markers_total);
+            $lng = ($lng / $markers_total);
+        }
+        else {
+            $lat = 65;
+            $lng = 13;
+        }
+        ?>
+        var map_latlng = new google.maps.LatLng(<?php echo $lat ?>,<?php echo $lng ?>);
+        var myOptions = {
+            zoom: <?php echo $zoom ?>,
+            center: map_latlng,
+            draggable: <?php echo $draggable ?>,
+            scrollwheel: <?php echo $scrollwheel ?>,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.LARGE
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('sightings_map'),
+                myOptions);
+        var addMarker = function(map, latlng) {
+            var marker = new google.maps.Marker({
+                map: map,
+                draggable: false,
+                position: latlng
+            });
+            return marker;
+        };
+        <?php
+        // Render sighting markers on map
+        if(count($sightings) > 0) {
+            foreach($sightings as $sight)
+            {
+                $sight_meta = get_post_meta($sight->ID, SIGHTINGS_HANDLE, ARRAY_A);
 
-                    $sight_meta = get_post_meta($sight->ID, SIGHTINGS_HANDLE, ARRAY_A);
-
-                    if($sight != '' && $sight->post_status == 'publish') {
-                        $sight_info = '<div class="sight_info">';
+                if($sight != '' && $sight->post_status == 'publish') {
+                    $sight_info = '<div class="sight_info">';
                         has_post_thumbnail($sight->ID) ? $sight_info .= '<p>'.get_the_post_thumbnail($sight->ID,'thumbnail').'</p>' : '';
-                        $sight_info .= '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
-                        $sight_info .= '<p class="excerpt">'.($sight->post_excerpt != '' ? $manager->shorten($sight->post_excerpt,100) : $manager->shorten($sight->post_content,100)).'</p>';
-                        $sight_categories = wp_get_post_categories($sight->ID);
-                        $sight_info .= '<p><strong>'.get_cat_name($sight_categories[0]).'</strong></p>'; // Will only fetch the first category
-                        if(isset($sight_meta['gf_id']))
-                        { // START Gravity Forms optional features
-                            $num_submits = RGFormsModel::get_form_counts($sight_meta['gf_id']);
-                            $sight_info .= '<p>'.__('Responses received',SIGHTINGS_HANDLE).': '.$num_submits['total'].'</p>';
-                        } // END Gravity Forms optional features
-                        $sight_info .= '</div>';
+                    $sight_info .= '<p><strong><a href="'.get_post_permalink($sight->ID).'">'.$sight->post_title.'</a></strong></p>';
+                    $sight_info .= '<p class="excerpt">'.($sight->post_excerpt != '' ? $manager::shorten($sight->post_excerpt,100) : $manager::shorten($sight->post_content,100)).'</p>';
+                    $sight_categories = wp_get_post_categories($sight->ID);
+                    $sight_info .= '<p><strong>'.get_cat_name($sight_categories[0]).'</strong></p>'; // Will only fetch the first category
+                    $sight_info .= '</div>';
+                    ?>
+                    var infoWindow = new google.maps.InfoWindow();
+                    <?php
+                    foreach($sight_meta['markers'] as $marker_latlng) {
                         ?>
-                        var latlng = new google.maps.LatLng(<?php echo $sight_meta['lat'] ?>,<?php echo $sight_meta['lng'] ?>);
-                        var infoWindow = new google.maps.InfoWindow ();
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            draggable: false,
-                            animation: google.maps.Animation.DROP,
-                            position: latlng
-                        });
+                        var latlng = new google.maps.LatLng(<?php echo $marker_latlng[0] ?>,<?php echo $marker_latlng[1] ?>);
+                        var marker = addMarker(map, latlng);
                         google.maps.event.addListener(marker, 'click', function(){
                             infoWindow.setContent('<?php echo $sight_info ?>');
                             infoWindow.open(map, this);
                         });
-                        <?php
+                        <?
                     }
                 }
-            } ?>
+            }
+        } ?>
             jQuery('.sightings_contributor_panel a').one('click', function() {
                 var markerImage = new google.maps.MarkerImage('<?php echo SIGHTINGS_PLUGIN_DIR_URL ?>/images/blue-marker.png',
                       new google.maps.Size(32,32),
@@ -237,7 +247,7 @@ function sightings_map_function($parameters) {
                         icon: markerImage,
                         shadow: markerShadow
                     });
-                
+
                 // Initial marker information
                 var greet = function () {
                     var stopAnimation = function() {
