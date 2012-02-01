@@ -94,7 +94,11 @@ Thanks!
 
 3. The Sighings settings page in wp-admin.
 
-4. The Sightings contribution form displayed on a page in the Twenty Ten theme.
+4. The Sightings contribution form displayed on a [sightings-map] in the Twenty Ten theme.
+
+5. An empty [sightings-map] with the contribute-link at the bottom.
+
+6. A contribution marker on the [sightings-map]. The marker appears after clicking on the contribute-link.
 
 == Changelog ==
 
