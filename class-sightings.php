@@ -133,23 +133,26 @@ class Sightings_Manager {
             // Create image attachment for new Sighting
             if(isset($sightings_post_array['image_file'])) {
 
-                $file = $sightings_post_array['image_file'];
+                if($_FILES[$sightings_post_array['image_file']]['error'] == 0) {
 
-                if(!function_exists('media_handle_upload')){
-                    include_once('wp-admin/includes/file.php');
-                    include_once('wp-admin/includes/media.php');
-                    include_once('wp-admin/includes/image.php');
-                }
+                    $file_id = $sightings_post_array['image_file'];
 
-                $new_attachment_id = media_handle_upload($file, $new_post_id);
+                    if(!function_exists('media_handle_upload')){
+                        include_once('wp-admin/includes/file.php');
+                        include_once('wp-admin/includes/media.php');
+                        include_once('wp-admin/includes/image.php');
+                    }
 
-                if(!$new_attachment_id) {
-                    throw new Exception('Could not handle upload for Sighting id:'.$new_post_id);
-                }
-                else {
-                    // Set new attachment as new post thumbnail
-                    if(!set_post_thumbnail($new_post_id, $new_attachment_id))
-                        throw new Exception ('Could not set the new attachment as post thumbnail for post '.$new_post_id);
+                    $new_attachment_id = media_handle_upload($file_id, $new_post_id);
+
+                    if(!$new_attachment_id) {
+                        throw new Exception('Could not handle upload for Sighting id:'.$new_post_id);
+                    }
+                    else {
+                        // Set new attachment as new post thumbnail
+                        if(!set_post_thumbnail($new_post_id, $new_attachment_id))
+                            throw new Exception ('Could not set the new attachment as post thumbnail for post '.$new_post_id);
+                    }
                 }
             }
 

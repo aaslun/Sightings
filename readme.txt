@@ -110,6 +110,9 @@ Thanks!
 * IMPORTANT! You must delete all your previous sightings after upgrading to v 1.3.2. Multiple marker feature is not backwards compatible with sightings created before v 1.3.2.
 * No marker added initially on new posts. Makes sense, first marker should be added by user.
 
+= 1.3.2.1 =
+* Important bug fix for user submitted post images. User was forced to submit an image, if no image was submitted a fatal error was thrown. (Thanks to Karen for bug reporting)
+
 = 1.3.1 =
 * Better back-end handling of image uploads for contributor sightings.
 * CSS fixes
@@ -142,6 +145,9 @@ Thanks!
 * Initial release. Basic functionality.
 
 == Upgrade Notice ==
+
+= 1.3.2.1 =
+* Important bug fix for user submitted post images on sights.
 
 = 1.3.2 =
 Support for multiple markers on one post. IMPORTANT! You must delete all your previous sightings after upgrading to v 1.3.2. Multiple marker feature is not backwards compatible with sightings created before v 1.3.2.
